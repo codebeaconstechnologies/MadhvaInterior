@@ -41,7 +41,7 @@ export default function Hero() {
       </div>
 
       <div className="hero__badge">
-        <span className="hero__badge-number">500+</span>
+        <span className="hero__badge-number">50+</span>
         <span className="hero__badge-label">Interiors delivered across Pune</span>
       </div>
     </section>

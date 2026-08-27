@@ -168,5 +168,5 @@ export const materials = [
 export const trustBadges = [
   "People's Choice Award",
   "Leading & Most Promising Interior Design Firm — 2025",
-  "500+ Interiors Delivered",
+  "50+ Interiors Delivered",
 ] as const;
