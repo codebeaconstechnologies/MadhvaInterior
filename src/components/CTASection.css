@@ -1,0 +1,38 @@
+.cta-section {
+  padding-block: clamp(4.5rem, 9vw, 7rem);
+  text-align: center;
+}
+
+.cta-section__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+  max-width: 42rem;
+  margin-inline: auto;
+}
+
+.cta-section h2 {
+  margin-top: 0.4rem;
+}
+
+.cta-section__desc {
+  color: var(--on-dark-muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.cta-section__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.8rem;
+}
+
+.cta-section__phone {
+  font-size: 0.85rem;
+  color: var(--on-dark-muted);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

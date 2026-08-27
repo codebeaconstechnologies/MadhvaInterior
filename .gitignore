@@ -1,0 +1,14 @@
+node_modules
+dist
+.wrangler
+.env
+.env.local
+.dev.vars
+*.local
+.DS_Store
+npm-debug.log*
+*.tsbuildinfo
+
+# Source brand PDF — large (200MB+) reference file, not part of the site.
+# Content has already been extracted into src/data/ and public/images/.
+Madhva.pdf

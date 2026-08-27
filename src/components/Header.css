@@ -1,0 +1,213 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Note: background + backdrop-filter live on this absolutely-positioned
+   backdrop layer, not on <header> itself — backdrop-filter on an ancestor
+   of .mobile-nav would create a new containing block for it, breaking its
+   position:fixed full-viewport overlay. Keeping it on a sibling avoids that. */
+.site-header__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background-color 0.4s var(--ease), border-color 0.4s var(--ease);
+  pointer-events: none;
+}
+
+.site-header.is-scrolled .site-header__backdrop,
+.site-header.menu-open .site-header__backdrop {
+  background: rgba(250, 247, 241, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-header__bar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-block: 1.1rem;
+}
+
+.site-header__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-display);
+  flex-shrink: 0;
+}
+
+.site-header__logo img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.site-header__logo-name {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.site-header__logo-suffix {
+  font-size: 1.15rem;
+  color: var(--accent-strong);
+}
+
+.site-header__nav {
+  display: none;
+}
+
+.site-header__nav ul {
+  display: flex;
+  gap: clamp(1.4rem, 2.5vw, 2.4rem);
+}
+
+.site-header__nav a {
+  font-size: 0.86rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--foreground);
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.site-header__nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s var(--ease);
+}
+
+.site-header__nav a:hover::after,
+.site-header__nav a.is-active::after {
+  width: 100%;
+}
+
+.site-header__nav a.is-active {
+  color: var(--accent-strong);
+}
+
+.site-header__cta {
+  display: none;
+}
+
+.site-header__toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.site-header__toggle span {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: var(--foreground);
+  transition: transform 0.35s var(--ease), opacity 0.35s var(--ease);
+}
+
+.menu-open .site-header__toggle span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.menu-open .site-header__toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-open .site-header__toggle span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  top: 73px;
+  background: var(--background);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.5rem var(--gutter) 3rem;
+  transform: translateY(-8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+}
+
+.menu-open .mobile-nav {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.mobile-nav ul li {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+}
+
+.menu-open .mobile-nav ul li {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+}
+
+.mobile-nav ul a {
+  font-family: var(--font-display);
+  font-size: 2rem;
+}
+
+.mobile-nav__cta {
+  margin-top: 2rem;
+  align-self: flex-start;
+}
+
+.mobile-nav__contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+@media (min-width: 900px) {
+  .site-header__nav {
+    display: block;
+  }
+
+  .site-header__cta {
+    display: block;
+  }
+
+  .site-header__toggle {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: none;
+  }
+}

@@ -1,0 +1,28 @@
+.project-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.project-filter__btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 0.55rem 1.2rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease), background-color 0.3s var(--ease);
+}
+
+.project-filter__btn:hover {
+  border-color: var(--accent);
+  color: var(--foreground);
+}
+
+.project-filter__btn.is-active {
+  background: var(--foreground);
+  border-color: var(--foreground);
+  color: var(--on-dark);
+}

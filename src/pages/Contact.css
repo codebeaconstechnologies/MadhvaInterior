@@ -1,0 +1,52 @@
+.contact-page__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.contact-page__info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contact-page__title {
+  margin-top: 0.5rem;
+  max-width: 16ch;
+}
+
+.contact-page__facts {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1.75rem;
+}
+
+.contact-page__facts dt {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+  margin-bottom: 0.4rem;
+}
+
+.contact-page__facts dd {
+  margin: 0;
+  color: var(--foreground);
+  line-height: 1.6;
+}
+
+.contact-page__form-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: clamp(1.5rem, 4vw, 2.75rem);
+}
+
+@media (min-width: 900px) {
+  .contact-page__grid {
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 4rem;
+  }
+}
