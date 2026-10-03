@@ -1,34 +1,232 @@
+/* ---------------------------------------------------------------
+   Hero — full-bleed photo slideshow on mobile; on wide screens a
+   navy copy panel on the left and the slideshow stage on the right
+   (the source photos are portrait, so the stage keeps them crisp).
+   Each slide runs a Ken Burns move (zoom or slow pan) while shown.
+   --------------------------------------------------------------- */
+
 .hero {
   position: relative;
   min-height: 92vh;
-  display: flex;
-  align-items: flex-end;
+  display: grid;
+  align-items: end;
   color: var(--on-dark);
+  background: var(--navy-deep);
 }
 
-.hero__media {
+/* ---------- Stage ---------- */
+.hero__stage {
   position: absolute;
   inset: 0;
-  z-index: 0;
   overflow: hidden;
+  background: var(--navy-deep);
 }
 
-.hero__media img {
+.hero__slide {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  transition: opacity 0.9s var(--ease);
+}
+
+.hero__slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 65%;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.hero__slide.is-active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* The outgoing slide keeps its animation running while it fades, so the
+   image doesn't snap back to its start position mid-crossfade. */
+.hero__slide.is-active img,
+.hero__slide.is-leaving img {
+  animation: 5s linear forwards;
+}
+
+.hero__slide--zoom-in.is-active img,
+.hero__slide--zoom-in.is-leaving img {
+  animation-name: hero-zoom-in;
+}
+
+.hero__slide--zoom-out.is-active img,
+.hero__slide--zoom-out.is-leaving img {
+  animation-name: hero-zoom-out;
+}
+
+.hero__slide--pan-left.is-active img,
+.hero__slide--pan-left.is-leaving img {
+  animation-name: hero-pan-left;
+}
+
+.hero__slide--pan-right.is-active img,
+.hero__slide--pan-right.is-leaving img {
+  animation-name: hero-pan-right;
+}
+
+.hero.is-paused .hero__slide img {
+  animation-play-state: paused;
+}
+
+@keyframes hero-zoom-in {
+  from { transform: scale(1); }
+  to { transform: scale(1.14); }
+}
+
+@keyframes hero-zoom-out {
+  from { transform: scale(1.16); }
+  to { transform: scale(1.02); }
+}
+
+@keyframes hero-pan-left {
+  from { transform: scale(1.14) translateX(4%); }
+  to { transform: scale(1.14) translateX(-4%); }
+}
+
+@keyframes hero-pan-right {
+  from { transform: scale(1.14) translateX(-4%); }
+  to { transform: scale(1.14) translateX(4%); }
 }
 
 .hero__scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(10, 18, 33, 0.4) 0%, rgba(10, 18, 33, 0.1) 38%, rgba(10, 18, 33, 0.88) 100%);
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(10, 18, 33, 0.55) 0%, rgba(10, 18, 33, 0.05) 30%, rgba(10, 18, 33, 0.92) 100%);
+}
+
+/* ---------- Controls ---------- */
+.hero__controls {
+  position: absolute;
+  z-index: 3;
+  top: 1.25rem;
+  left: var(--gutter);
+  right: var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.hero__caption {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  overflow: hidden;
+}
+
+.hero__counter {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--on-dark);
+}
+
+.hero__counter span {
+  font-size: 0.85rem;
+  color: var(--on-dark-muted);
+}
+
+.hero__label {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  animation: hero-label-in 0.8s var(--ease) both;
+  text-shadow: 0 1px 8px rgba(10, 18, 33, 0.6);
+}
+
+@keyframes hero-label-in {
+  from { opacity: 0; transform: translateY(100%); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero__arrows {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.hero__arrows button {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  border: 1px solid rgba(246, 241, 228, 0.45);
+  background: rgba(18, 35, 63, 0.25);
+  backdrop-filter: blur(4px);
+  color: var(--on-dark);
+  font-size: 1rem;
+  transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.hero__arrows button:hover {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+}
+
+.hero__progress {
+  position: absolute;
+  z-index: 3;
+  top: 4.4rem;
+  left: var(--gutter);
+  right: var(--gutter);
+  display: flex;
+  gap: 0.35rem;
+}
+
+.hero__progress button {
+  flex: 1;
+  height: 14px;
+  padding: 6px 0;
+  background: none;
+  border: none;
+}
+
+.hero__progress button::before {
+  content: "";
+  display: block;
+  height: 2px;
+  background: rgba(246, 241, 228, 0.28);
+}
+
+.hero__progress span {
+  display: block;
+  height: 2px;
+  margin-top: -2px;
+  background: var(--accent-soft);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.hero__progress .is-done span {
+  transform: scaleX(1);
+}
+
+.hero__progress .is-active span {
+  animation: hero-progress linear forwards;
+}
+
+.hero.is-paused .hero__progress span {
+  animation-play-state: paused;
+}
+
+@keyframes hero-progress {
+  to { transform: scaleX(1); }
+}
+
+/* ---------- Copy panel ---------- */
+.hero__panel {
+  position: relative;
+  z-index: 3;
+  padding-inline: var(--gutter);
 }
 
 .hero__content {
-  position: relative;
-  z-index: 1;
   padding-bottom: clamp(3.5rem, 8vw, 6rem);
   padding-top: 10rem;
   display: flex;
@@ -68,17 +266,18 @@
   margin-top: 0.6rem;
 }
 
-.hero__ghost {
+.hero .hero__ghost {
   color: var(--on-dark);
   text-decoration-color: var(--accent-soft);
 }
 
+/* ---------- Badge ---------- */
 .hero__badge {
   position: absolute;
   right: clamp(1.25rem, 5vw, 4rem);
   bottom: 0;
   transform: translateY(50%);
-  z-index: 2;
+  z-index: 4;
   display: flex;
   align-items: center;
   gap: 1.1rem;
@@ -103,6 +302,46 @@
   opacity: 0.92;
 }
 
+/* ---------- Split layout ---------- */
+@media (min-width: 960px) {
+  .hero {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    align-items: center;
+    min-height: min(92vh, 900px);
+  }
+
+  .hero__stage {
+    position: relative;
+    inset: auto;
+    grid-column: 2;
+    grid-row: 1;
+    height: 100%;
+    min-height: inherit;
+  }
+
+  .hero__scrim {
+    background: linear-gradient(90deg, rgba(18, 35, 63, 0.55) 0%, rgba(18, 35, 63, 0) 22%),
+      linear-gradient(180deg, rgba(10, 18, 33, 0.45) 0%, rgba(10, 18, 33, 0) 25%, rgba(10, 18, 33, 0) 75%, rgba(10, 18, 33, 0.45) 100%);
+  }
+
+  .hero__panel {
+    grid-column: 1;
+    grid-row: 1;
+    padding-left: max(var(--gutter), calc((100vw - var(--container-max)) / 2 + var(--gutter)));
+    padding-right: clamp(2rem, 4vw, 4rem);
+  }
+
+  .hero__content {
+    padding-block: 5rem;
+  }
+
+  .hero__badge {
+    right: auto;
+    left: calc(47.5% - 1px);
+    transform: translate(-50%, 50%);
+  }
+}
+
 @media (max-width: 640px) {
   .hero__badge {
     display: none;
@@ -113,5 +352,9 @@
   .hero__content {
     opacity: 1;
     transform: none;
+  }
+
+  .hero__slide img {
+    animation: none !important;
   }
 }

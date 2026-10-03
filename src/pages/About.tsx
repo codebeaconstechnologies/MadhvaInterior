@@ -2,7 +2,8 @@ import Seo from "../components/Seo";
 import SectionHeading from "../components/SectionHeading";
 import CTASection from "../components/CTASection";
 import Reveal from "../components/Reveal";
-import { studio, processSteps, materials, whyChooseUs } from "../data/studio";
+import ProcessTimeline from "../components/ProcessTimeline";
+import { studio, materials, whyChooseUs } from "../data/studio";
 import "./About.css";
 
 export default function About() {
@@ -112,15 +113,7 @@ export default function About() {
           <Reveal>
             <SectionHeading eyebrow="Our Approach" title="How a project comes together" onDark />
           </Reveal>
-          <div className="about-process">
-            {processSteps.map((step, i) => (
-              <Reveal key={step.number} delay={i * 70} className="about-process__step">
-                <span className="about-process__number">{step.number}</span>
-                <h4>{step.title}</h4>
-                <p>{step.description}</p>
-              </Reveal>
-            ))}
-          </div>
+          <ProcessTimeline />
         </div>
       </section>
 

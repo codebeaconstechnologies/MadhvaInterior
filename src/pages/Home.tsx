@@ -6,8 +6,10 @@ import CTASection from "../components/CTASection";
 import Button from "../components/Button";
 import Reveal from "../components/Reveal";
 import TestimonialCard from "../components/TestimonialCard";
+import BeforeAfter from "../components/BeforeAfter";
+import Promises from "../components/Promises";
 import { projects } from "../data/projects";
-import { services, whyChooseUs, trustBadges } from "../data/studio";
+import { services, trustBadges } from "../data/studio";
 import { testimonials } from "../data/testimonials";
 import "./Home.css";
 
@@ -62,6 +64,30 @@ export default function Home() {
           {trustBadges.map((badge) => (
             <span key={badge}>{badge}</span>
           ))}
+        </div>
+      </section>
+
+      {/* Before / After */}
+      <section className="section home-ba">
+        <div className="container home-ba__grid">
+          <Reveal className="home-ba__intro">
+            <SectionHeading
+              eyebrow="Before & After"
+              title="The empty flat, and what we made of it."
+              description="Drag the slider to see a bare, handed-over flat become a finished home — the same room, the same angle."
+            />
+            <ul className="home-ba__facts">
+              <li>
+                <strong>50+</strong>
+                <span>Flats transformed</span>
+              </li>
+              <li>
+                <strong>3D</strong>
+                <span>Previewed before we build</span>
+              </li>
+            </ul>
+          </Reveal>
+          <BeforeAfter />
         </div>
       </section>
 
@@ -158,20 +184,13 @@ export default function Home() {
       <section className="section--tight section--muted">
         <div className="container">
           <Reveal>
-            <SectionHeading eyebrow="Why Choose Us" title="Built on trust, delivered on time." />
+            <SectionHeading
+              eyebrow="Why Choose Us"
+              title="Built on trust, delivered on time."
+              description="Six promises. One reason — a home you love coming back to."
+            />
           </Reveal>
-          <div className="home-why-grid">
-            {whyChooseUs.map((item, i) => (
-              <Reveal
-                key={item.title}
-                delay={i * 50}
-                className={`home-why-item${i % 2 === 0 ? " home-why-item--navy" : " home-why-item--terracotta"}`}
-              >
-                <h4>{item.title}</h4>
-                <p>{item.description}</p>
-              </Reveal>
-            ))}
-          </div>
+          <Promises />
         </div>
       </section>
 

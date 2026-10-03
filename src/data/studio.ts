@@ -170,3 +170,106 @@ export const trustBadges = [
   "Leading & Most Promising Interior Design Firm — 2025",
   "50+ Interiors Delivered",
 ] as const;
+
+// Homepage hero slideshow. `motion` picks the Ken Burns move applied while
+// the slide is on screen — alternate them so consecutive slides feel varied.
+export type SlideMotion = "zoom-in" | "zoom-out" | "pan-left" | "pan-right";
+
+export const heroSlides: ReadonlyArray<{
+  src: string;
+  alt: string;
+  label: string;
+  motion: SlideMotion;
+}> = [
+  {
+    src: "/images/hero/hero-living-room.jpg",
+    alt: "Warm, marble-paneled living room with a crystal chandelier and symmetrical seating",
+    label: "Living Room",
+    motion: "zoom-in",
+  },
+  {
+    src: "/images/showcase/living-sage-sofa.jpg",
+    alt: "Living room with a sage boucle sofa, slatted feature wall and marble floor",
+    label: "Living Room",
+    motion: "pan-left",
+  },
+  {
+    src: "/images/showcase/kitchen-green-walnut.jpg",
+    alt: "Modular kitchen in deep green with walnut overhead cabinets",
+    label: "Modular Kitchen",
+    motion: "zoom-out",
+  },
+  {
+    src: "/images/showcase/bedroom-textured-wall.jpg",
+    alt: "Master bedroom with a textured accent wall and soft cove lighting",
+    label: "Master Bedroom",
+    motion: "pan-right",
+  },
+  {
+    src: "/images/showcase/kitchen-arch-partition.jpg",
+    alt: "Arched wooden partition with a backlit niche opening into the kitchen",
+    label: "Entry & Kitchen",
+    motion: "zoom-in",
+  },
+  {
+    src: "/images/showcase/living-tv-wall.jpg",
+    alt: "Living room TV wall with a floating walnut console",
+    label: "TV Wall",
+    motion: "pan-left",
+  },
+  {
+    src: "/images/showcase/kids-bedroom-scallop.jpg",
+    alt: "Kids' bedroom with a scalloped upholstered headboard and window seat",
+    label: "Kids' Bedroom",
+    motion: "zoom-out",
+  },
+  {
+    src: "/images/showcase/foyer-console.jpg",
+    alt: "Foyer console with abstract wall art and fresh flowers",
+    label: "Foyer",
+    motion: "pan-right",
+  },
+  {
+    src: "/images/showcase/bedroom-warm-wood.jpg",
+    alt: "Bedroom with warm wood wainscoting and a bedside lamp",
+    label: "Guest Bedroom",
+    motion: "zoom-in",
+  },
+  {
+    src: "/images/showcase/study-window-seat.jpg",
+    alt: "Study nook with a floating desk, wall shelf and window seat",
+    label: "Study Nook",
+    motion: "pan-left",
+  },
+];
+
+// Before / after pairs for the homepage comparison slider.
+// TODO: `before` should be a photo of the same room as handed over (bare
+// shell), shot from the same angle as `after`. Until one is supplied the
+// slider shows a desaturated placeholder of the finished room.
+export const beforeAfter: ReadonlyArray<{
+  id: string;
+  room: string;
+  caption: string;
+  before?: string;
+  after: string;
+}> = [
+  {
+    id: "living",
+    room: "Living Room",
+    caption: "Bare walls and a marble floor, turned into a soft, layered family lounge.",
+    after: "/images/showcase/living-sage-sofa.jpg",
+  },
+  {
+    id: "bedroom",
+    room: "Bedroom",
+    caption: "An empty room given warm wood paneling, cove lighting and a calm palette.",
+    after: "/images/showcase/bedroom-warm-wood.jpg",
+  },
+  {
+    id: "kitchen",
+    room: "Kitchen",
+    caption: "A plain utility space rebuilt as a deep-green modular kitchen with walnut storage.",
+    after: "/images/showcase/kitchen-green-walnut.jpg",
+  },
+];

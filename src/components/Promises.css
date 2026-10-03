@@ -1,0 +1,162 @@
+/* ---------------------------------------------------------------
+   "Built on trust" promise cards. On scroll-in, each card's colour
+   panel wipes up from the bottom, then its numeral rises, the icon
+   draws itself, and the copy fades in — staggered by --i.
+   --------------------------------------------------------------- */
+
+.promises {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.promise {
+  --delay: calc(var(--i) * 110ms);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  min-height: 15.5rem;
+  padding: 2rem 1.9rem 2.2rem;
+  color: var(--on-dark);
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1s var(--ease) var(--delay), transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+}
+
+.promise--navy {
+  background: var(--navy);
+}
+
+.promise--terracotta {
+  background: var(--terracotta);
+}
+
+.promises.is-visible .promise {
+  clip-path: inset(0 0 0 0);
+}
+
+.promise:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 40px -18px rgba(18, 35, 63, 0.55);
+}
+
+/* Big outlined numeral, top-right */
+.promise__number {
+  position: absolute;
+  top: 0.6rem;
+  right: 1.2rem;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 7vw, 5.5rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(246, 241, 228, 0.35);
+  transform: translateY(60%);
+  opacity: 0;
+  transition: transform 1s var(--ease) calc(var(--delay) + 350ms), opacity 1s var(--ease) calc(var(--delay) + 350ms),
+    color 0.5s var(--ease);
+}
+
+.promises.is-visible .promise__number {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.promise:hover .promise__number {
+  color: rgba(246, 241, 228, 0.12);
+}
+
+/* Self-drawing icon */
+.promise__icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  margin-bottom: auto;
+  color: var(--accent-soft);
+  stroke-dasharray: 90;
+  stroke-dashoffset: 90;
+  transition: stroke-dashoffset 1.6s var(--ease) calc(var(--delay) + 450ms);
+}
+
+.promise--terracotta .promise__icon {
+  color: var(--on-dark);
+}
+
+.promises.is-visible .promise__icon {
+  stroke-dashoffset: 0;
+}
+
+.promise h4,
+.promise p {
+  position: relative;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+
+.promise h4 {
+  margin-top: 1.75rem;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 400;
+  transition-delay: calc(var(--delay) + 550ms);
+}
+
+.promise p {
+  color: rgba(246, 241, 228, 0.82);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  max-width: 30ch;
+  transition-delay: calc(var(--delay) + 650ms);
+}
+
+.promises.is-visible .promise h4,
+.promises.is-visible .promise p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Gold rule that sweeps along the bottom edge on hover */
+.promise__rule {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  background: var(--accent-soft);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--ease);
+}
+
+.promise:hover .promise__rule {
+  transform: scaleX(1);
+}
+
+@media (min-width: 640px) {
+  .promises {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .promises {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .promise,
+  .promise__number,
+  .promise h4,
+  .promise p {
+    clip-path: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .promise__icon {
+    stroke-dashoffset: 0;
+  }
+}
