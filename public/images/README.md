@@ -1,7 +1,9 @@
 # Website photos
 
-Every photo on the site comes from the folders below. To add, remove or
+Photos for the hero, before/after slider, project galleries and About page
+come from the folders below (all inside `public/images/`). To add, remove or
 replace a photo, change the files here and redeploy — no code changes needed.
+Photos are served under the same names, e.g. `/images/hero/01_living-room.jpg`.
 Use `.jpg` (or `.png` / `.webp`), ideally under ~400 KB and about 1600–2000 px wide.
 
 | Folder | What it's for | File names |
@@ -21,8 +23,8 @@ The folder name under `gallery/` is the project ID, and must match the `id` in
 
 A new project needs an entry in `projects.ts` plus a matching folder here.
 
-## Not in these folders
+## Other files in public/images
 
-Logos, service photos and testimonial portraits stay in `public/images/`.
-`public/images/og-image.jpg` is the preview image shown when the site link is
+`studio/` (logos, service photos) and `testimonials/` (client portraits) are
+referenced by fixed names in the code. `og-image.jpg` is the preview image shown when the site link is
 shared (WhatsApp, Facebook…).

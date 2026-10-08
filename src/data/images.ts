@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------
    Site photography, read straight from the folders under
-   src/assets/images at build time. To add, remove or replace a photo,
+   public/images at build time. To add, remove or replace a photo,
    change the files in the right folder and redeploy — no code edits.
 
    hero/           NN_label.jpg            e.g. 03_modular-kitchen.jpg
@@ -14,31 +14,21 @@
    about/          founder.jpg, studio.jpg
    --------------------------------------------------------------- */
 
+import siteImages from "virtual:site-images";
+
 type UrlMap = Record<string, string>;
 
-// Vite needs each glob's options written inline, so they're repeated here.
-const heroFiles: UrlMap = import.meta.glob("../assets/images/hero/*.{jpg,jpeg,png,webp,avif}", {
-  eager: true,
-  query: "?url",
-  import: "default",
-});
-const beforeAfterFiles: UrlMap = import.meta.glob("../assets/images/before-after/*.{jpg,jpeg,png,webp,avif}", {
-  eager: true,
-  query: "?url",
-  import: "default",
-});
-const galleryFiles: UrlMap = import.meta.glob("../assets/images/gallery/*/*.{jpg,jpeg,png,webp,avif}", {
-  eager: true,
-  query: "?url",
-  import: "default",
-});
-const aboutFiles: UrlMap = import.meta.glob("../assets/images/about/*.{jpg,jpeg,png,webp,avif}", {
-  eager: true,
-  query: "?url",
-  import: "default",
-});
+/** URLs directly inside `folder` (e.g. "/images/hero/"), keyed by themselves. */
+function filesIn(folder: RegExp): UrlMap {
+  return Object.fromEntries(siteImages.filter((url) => folder.test(url)).map((url) => [url, url]));
+}
 
-/** "../assets/images/hero/03_modular-kitchen.jpg" → "03_modular-kitchen" */
+const heroFiles = filesIn(/^\/images\/hero\/[^/]+$/);
+const beforeAfterFiles = filesIn(/^\/images\/before-after\/[^/]+$/);
+const galleryFiles = filesIn(/^\/images\/gallery\/[^/]+\/[^/]+$/);
+const aboutFiles = filesIn(/^\/images\/about\/[^/]+$/);
+
+/** "/images/hero/03_modular-kitchen.jpg" → "03_modular-kitchen" */
 const baseName = (path: string) => path.slice(path.lastIndexOf("/") + 1).replace(/\.[^.]+$/, "");
 
 const naturalSort = (a: string, b: string) => a.localeCompare(b, undefined, { numeric: true });

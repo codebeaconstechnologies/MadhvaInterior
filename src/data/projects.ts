@@ -6,7 +6,7 @@ export interface ProjectImage {
 }
 
 // Project details. Photos are not listed here: they come from
-// src/assets/images/gallery/<id>/ (see ./images.ts), so `id` must match the
+// public/images/gallery/<id>/ (see ./images.ts), so `id` must match the
 // folder name. `coverRoom` picks the cover when there's no <id>_cover file.
 interface ProjectInfo {
   id: string;
