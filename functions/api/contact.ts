@@ -8,7 +8,8 @@
  *
  * Required environment variables / secrets (see README for setup):
  *   RESEND_API_KEY   - secret, from resend.com
- *   CONTACT_EMAIL    - the studio inbox that receives enquiries
+ *   CONTACT_EMAIL    - the inbox(es) that receive enquiries; separate several
+ *                       addresses with commas
  *   FROM_EMAIL       - verified sender address/domain in Resend
  *
  * Optional bindings:
@@ -218,7 +219,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       },
       body: JSON.stringify({
         from: env.FROM_EMAIL,
-        to: [env.CONTACT_EMAIL],
+        to: env.CONTACT_EMAIL.split(",").map((s) => s.trim()).filter(Boolean),
         ...(payload.email ? { reply_to: payload.email } : {}),
         subject: `✨ New enquiry: ${[payload.projectType, payload.propertyType].filter(Boolean).join(" · ")} — ${payload.name}`,
         html: buildEmailHtml(payload),
