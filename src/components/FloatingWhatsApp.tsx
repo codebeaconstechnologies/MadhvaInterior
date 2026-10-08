@@ -1,9 +1,8 @@
 import { studio } from "../data/studio";
 import "./FloatingWhatsApp.css";
 
-const digitsOnly = studio.phone.replace(/[^\d]/g, "");
-const whatsappHref = `https://wa.me/${digitsOnly}?text=${encodeURIComponent(
-  "Hi Madhva Interiors, I'd like to enquire about an interior design project."
+const whatsappHref = `https://wa.me/${studio.whatsappNumber}?text=${encodeURIComponent(
+  "Hello Madhva Interiors! 👋 I'm planning the interiors for my space and would love your help in making it beautiful. ✨"
 )}`;
 
 export default function FloatingWhatsApp() {

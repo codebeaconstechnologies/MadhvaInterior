@@ -12,6 +12,7 @@
 }
 
 .ba__tabs button {
+  font-family: var(--font-accent);
   padding: 0.6rem 1.3rem;
   border-radius: var(--radius-pill);
   border: 1px solid var(--border);
@@ -82,6 +83,7 @@
 }
 
 .ba__tag {
+  font-family: var(--font-accent);
   position: absolute;
   top: 1.1rem;
   z-index: 2;

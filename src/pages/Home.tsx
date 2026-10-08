@@ -5,16 +5,14 @@ import ProjectCard from "../components/ProjectCard";
 import CTASection from "../components/CTASection";
 import Button from "../components/Button";
 import Reveal from "../components/Reveal";
-import TestimonialCard from "../components/TestimonialCard";
+import Testimonials from "../components/Testimonials";
 import BeforeAfter from "../components/BeforeAfter";
 import Promises from "../components/Promises";
 import { projects } from "../data/projects";
 import { services, trustBadges } from "../data/studio";
-import { testimonials } from "../data/testimonials";
 import "./Home.css";
 
 const featured = projects.slice(0, 4);
-const featuredTestimonials = testimonials.slice(0, 3);
 
 export default function Home() {
   return (
@@ -78,8 +76,8 @@ export default function Home() {
             />
             <ul className="home-ba__facts">
               <li>
-                <strong>50+</strong>
-                <span>Flats transformed</span>
+                <strong>2</strong>
+                <span>Projects at a time — never more</span>
               </li>
               <li>
                 <strong>3D</strong>
@@ -200,17 +198,14 @@ export default function Home() {
           <Reveal>
             <SectionHeading
               eyebrow="Client Stories"
-              title="Our Beloved Clients"
+              title="What Our Clients Say"
+              description="Real homes, real families — in their own words."
               align="center"
             />
           </Reveal>
-          <div className="home-testimonial-grid">
-            {featuredTestimonials.map((t, i) => (
-              <Reveal key={t.id} delay={i * 90}>
-                <TestimonialCard testimonial={t} />
-              </Reveal>
-            ))}
-          </div>
+          <Reveal>
+            <Testimonials />
+          </Reveal>
         </div>
       </section>
 

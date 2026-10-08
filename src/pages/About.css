@@ -124,6 +124,7 @@
 }
 
 .about-materials__lifespan {
+  font-family: var(--font-accent);
   font-size: 0.78rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;

@@ -14,10 +14,10 @@ export default function CTASection({
   description,
 }: CTASectionProps) {
   return (
-    <section className="cta-section section--dark">
+    <section className="cta-section">
       <div className="container cta-section__inner">
         <Reveal>
-          <span className="eyebrow eyebrow--on-dark">{eyebrow}</span>
+          <span className="eyebrow cta-section__eyebrow">{eyebrow}</span>
           <h2>{title}</h2>
           {description && <p className="cta-section__desc">{description}</p>}
           <div className="cta-section__actions">

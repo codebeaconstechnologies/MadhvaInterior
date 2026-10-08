@@ -1,23 +1,37 @@
+/* Terracotta band (the button colour) so it reads apart from the navy footer below */
 .cta-section {
-  padding-block: clamp(4.5rem, 9vw, 7rem);
+  padding-block: clamp(3.25rem, 6vw, 4.75rem);
   text-align: center;
+  background: var(--terracotta);
+  color: var(--on-dark);
 }
 
-.cta-section__inner {
+.cta-section .cta-section__eyebrow {
+  color: rgba(246, 241, 228, 0.85);
+}
+
+.cta-section .btn-outline--on-dark {
+  border-color: rgba(246, 241, 228, 0.7);
+}
+
+.cta-section .btn-outline--on-dark:hover {
+  background: var(--on-dark);
+  color: var(--terracotta-deep);
+  border-color: var(--on-dark);
+}
+
+/* The Reveal wrapper is the flex parent, so space its children directly */
+.cta-section__inner > .reveal {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.4rem;
+  gap: 1rem;
   max-width: 42rem;
   margin-inline: auto;
 }
 
-.cta-section h2 {
-  margin-top: 0.4rem;
-}
-
 .cta-section__desc {
-  color: var(--on-dark-muted);
+  color: rgba(246, 241, 228, 0.9);
   font-size: 1.05rem;
   line-height: 1.7;
 }
@@ -26,13 +40,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  margin-top: 0.8rem;
+  gap: 0.9rem;
+  margin-top: 0.6rem;
 }
 
 .cta-section__phone {
   font-size: 0.85rem;
-  color: var(--on-dark-muted);
+  color: rgba(246, 241, 228, 0.9);
   text-decoration: underline;
   text-underline-offset: 4px;
+}
+
+.cta-section__phone:hover {
+  color: var(--on-dark);
 }

@@ -1,0 +1,268 @@
+/* ---------------------------------------------------------------
+   "What Our Clients Say" — one testimonial in the spotlight (round
+   portrait + large serif quote), auto-advancing with a progress
+   rule, and a strip of every client below to jump between them.
+   --------------------------------------------------------------- */
+
+.tm {
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ---------- Spotlight ---------- */
+.tm__stage {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 5vw, 4.5rem) clamp(1.75rem, 3.5vw, 2.75rem);
+}
+
+.tm__mark {
+  position: absolute;
+  top: clamp(1.25rem, 3vw, 2.25rem);
+  right: clamp(1.25rem, 4vw, 3.5rem);
+  height: 0.5em;
+  font-family: var(--font-display);
+  font-size: clamp(7rem, 12vw, 10rem);
+  line-height: 0.8;
+  color: var(--terracotta);
+  opacity: 0.14;
+  pointer-events: none;
+}
+
+.tm__slide {
+  position: relative;
+  margin: 0;
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+  min-height: 15rem;
+}
+
+/* Round crop of the client photo; the image is scaled and offset with
+   --scale / --dx / --dy (from the per-photo crop box in the data). */
+.tm__portrait,
+.tm__avatar {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--muted-bg);
+}
+
+.tm__portrait img,
+.tm__avatar img {
+  position: absolute;
+  top: calc(var(--dy) * -100%);
+  left: calc(var(--dx) * -100%);
+  width: calc(var(--scale) * 100%);
+  max-width: none;
+  height: auto;
+}
+
+.tm__portrait {
+  width: clamp(9rem, 20vw, 15.5rem);
+  outline: 1px solid var(--accent);
+  outline-offset: 10px;
+  margin: 11px;
+  animation: tm-portrait-in 0.9s var(--ease) both;
+}
+
+.tm__body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  animation: tm-body-in 0.9s var(--ease) 0.08s both;
+}
+
+.tm__quote {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.3vw, 1.95rem);
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--foreground);
+  max-width: 34ch;
+}
+
+.tm__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-left: 1.1rem;
+  border-left: 2px solid var(--terracotta);
+}
+
+.tm__name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+}
+
+.tm__meta {
+  font-family: var(--font-accent);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+}
+
+@keyframes tm-portrait-in {
+  from { opacity: 0; transform: scale(0.94); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes tm-body-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Controls ---------- */
+.tm__controls {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.tm__count {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+.tm__count span {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.tm__progress {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.tm__progress span {
+  display: block;
+  height: 100%;
+  background: var(--terracotta);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.tm__progress .is-running {
+  animation: tm-progress linear forwards;
+}
+
+@keyframes tm-progress {
+  to { transform: scaleX(1); }
+}
+
+.tm__arrows {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tm__arrows button {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--foreground);
+  font-size: 1rem;
+  transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+.tm__arrows button:hover {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+  color: var(--on-dark);
+}
+
+/* ---------- Client strip ---------- */
+.tm__list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.tm__list button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  padding: 0.9rem 0.5rem;
+  background: transparent;
+  border: none;
+  border-top: 2px solid var(--border);
+  text-align: left;
+  opacity: 0.55;
+  transition: opacity 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+
+.tm__list button:hover {
+  opacity: 0.85;
+}
+
+.tm__list button.is-active {
+  opacity: 1;
+  border-top-color: var(--terracotta);
+}
+
+.tm__avatar {
+  width: 2.9rem;
+}
+
+.tm__list-text {
+  display: none;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.tm__list-name {
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.tm__list-meta {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+@media (min-width: 860px) {
+  .tm__slide {
+    grid-template-columns: auto 1fr;
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  .tm__list button {
+    justify-content: flex-start;
+  }
+
+  .tm__list-text {
+    display: flex;
+  }
+}
+
+@media (max-width: 859px) {
+  .tm__slide {
+    justify-items: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tm__portrait,
+  .tm__body {
+    animation: none;
+  }
+}

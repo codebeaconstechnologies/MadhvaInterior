@@ -26,12 +26,11 @@ interface Env {
 
 interface ContactPayload {
   name: string;
-  email: string;
-  phone?: string;
-  projectType?: string;
+  phone: string;
+  email?: string;
+  projectType: string;
+  propertyType?: string;
   location?: string;
-  budget?: string;
-  contactMethod?: string;
   message: string;
   company?: string; // honeypot
 }
@@ -41,6 +40,13 @@ const MAX_FIELD_LENGTH = 2_000;
 const RATE_LIMIT_WINDOW_SECONDS = 60 * 10; // 10 minutes
 const RATE_LIMIT_MAX_REQUESTS = 5;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PROJECT_TYPES = ["Residential", "Commercial", "Renovation"];
+const PROPERTY_TYPES = ["1 BHK", "2 BHK", "3 BHK", "4 BHK", "Penthouse", "Villa", "Bungalow"];
+
+// A 10-digit Indian mobile number, optionally prefixed with 0 or +91.
+function isValidPhone(value: string): boolean {
+  return /^(?:91|0)?[6-9]\d{9}$/.test(value.replace(/\D/g, ""));
+}
 
 function jsonResponse(body: unknown, status: number): Response {
   return new Response(JSON.stringify(body), {
@@ -65,7 +71,12 @@ function clean(value: unknown, maxLength = MAX_FIELD_LENGTH): string {
 
 function isValidPayload(payload: ContactPayload): string | null {
   if (!payload.name) return "Name is required.";
-  if (!payload.email || !EMAIL_RE.test(payload.email)) return "A valid email is required.";
+  if (!payload.phone || !isValidPhone(payload.phone)) return "A valid phone number is required.";
+  if (payload.email && !EMAIL_RE.test(payload.email)) return "Please provide a valid email.";
+  if (!PROJECT_TYPES.includes(payload.projectType)) return "Project type is required.";
+  if (payload.projectType !== "Commercial" && !PROPERTY_TYPES.includes(payload.propertyType || "")) {
+    return "Property type is required.";
+  }
   if (!payload.message) return "Message is required.";
   return null;
 }
@@ -88,12 +99,11 @@ async function checkRateLimit(env: Env, ip: string): Promise<boolean> {
 function buildEmailHtml(payload: ContactPayload): string {
   const rows: [string, string][] = [
     ["Name", payload.name],
-    ["Email", payload.email],
-    ["Phone", payload.phone || "—"],
-    ["Project Type", payload.projectType || "—"],
+    ["Phone", payload.phone],
+    ["Email", payload.email || "—"],
+    ["Project Type", payload.projectType],
+    ["Property Type", payload.propertyType || "—"],
     ["Project Location", payload.location || "—"],
-    ["Budget", payload.budget || "—"],
-    ["Preferred Contact Method", payload.contactMethod || "—"],
     ["Submitted", new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }) + " IST"],
   ];
 
@@ -174,14 +184,15 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     return jsonResponse({ ok: true }, 200);
   }
 
+  const projectType = clean(raw.projectType, 60);
   const payload: ContactPayload = {
     name: clean(raw.name, 200),
-    email: clean(raw.email, 200),
     phone: clean(raw.phone, 40),
-    projectType: clean(raw.projectType, 60),
+    email: clean(raw.email, 200),
+    projectType,
+    // Property type only applies to residential and renovation projects.
+    propertyType: projectType === "Commercial" ? "" : clean(raw.propertyType, 60),
     location: clean(raw.location, 200),
-    budget: clean(raw.budget, 60),
-    contactMethod: clean(raw.contactMethod, 40),
     message: clean(raw.message, MAX_FIELD_LENGTH),
   };
 
@@ -208,8 +219,8 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       body: JSON.stringify({
         from: env.FROM_EMAIL,
         to: [env.CONTACT_EMAIL],
-        reply_to: payload.email,
-        subject: `New Website Enquiry — ${payload.name}`,
+        ...(payload.email ? { reply_to: payload.email } : {}),
+        subject: `✨ New enquiry: ${[payload.projectType, payload.propertyType].filter(Boolean).join(" · ")} — ${payload.name}`,
         html: buildEmailHtml(payload),
       }),
     });

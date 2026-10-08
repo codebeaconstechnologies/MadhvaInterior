@@ -122,8 +122,11 @@ export default function Hero() {
       </div>
 
       <div className="hero__badge">
-        <span className="hero__badge-number">50+</span>
-        <span className="hero__badge-label">Interiors delivered across Pune</span>
+        <span className="hero__badge-number">2</span>
+        <span className="hero__badge-text">
+          <span className="hero__badge-label">Projects at a time</span>
+          <span className="hero__badge-tagline">We don&rsquo;t juggle. We perfect.</span>
+        </span>
       </div>
     </section>
   );

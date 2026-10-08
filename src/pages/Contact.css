@@ -1,3 +1,33 @@
+/* Page kicker centred in the band above the grid, framed by gold rules */
+.contact-page.section {
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.contact-page__header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: clamp(2rem, 4vw, 3.25rem);
+}
+
+.contact-page__kicker {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  font-family: var(--font-accent);
+  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+}
+
+.contact-page__kicker::before,
+.contact-page__kicker::after {
+  content: "";
+  width: clamp(2.5rem, 6vw, 4.5rem);
+  height: 1px;
+  background: var(--accent);
+}
+
 .contact-page__grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -10,42 +40,115 @@
   gap: 1.25rem;
 }
 
+.contact-page__note {
+  padding-left: 1rem;
+  border-left: 2px solid var(--terracotta);
+  color: var(--foreground);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  max-width: 44ch;
+}
+
 .contact-page__title {
-  margin-top: 0.5rem;
+  font-size: clamp(2.2rem, 4.2vw, 3.6rem);
   max-width: 16ch;
 }
 
 .contact-page__facts {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem 2rem;
   margin-top: 1.5rem;
   border-top: 1px solid var(--border);
   padding-top: 1.75rem;
 }
 
+/* Icon in a small ring beside each label; the value sits indented under the label */
 .contact-page__facts dt {
-  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-accent);
+  font-size: 0.78rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent-strong);
-  margin-bottom: 0.4rem;
+  color: var(--foreground);
+  margin-bottom: 0.3rem;
+}
+
+.contact-page__icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--terracotta);
+}
+
+.contact-page__icon svg {
+  width: 1rem;
+  height: 1rem;
 }
 
 .contact-page__facts dd {
-  margin: 0;
+  margin: 0 0 0 3rem;
   color: var(--foreground);
   line-height: 1.6;
 }
 
+@media (min-width: 480px) {
+  .contact-page__facts {
+    grid-template-columns: auto 1fr;
+  }
+
+  .contact-page__facts-wide {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Sized to its own content rather than stretched to the info column */
 .contact-page__form-wrap {
+  align-self: start;
   background: var(--surface);
   border: 1px solid var(--border);
   padding: clamp(1.5rem, 4vw, 2.75rem);
 }
 
 @media (min-width: 900px) {
-  .contact-page__grid {
+  /* Page kicker centred in the band above the grid, framed by gold rules */
+.contact-page.section {
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.contact-page__header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: clamp(2rem, 4vw, 3.25rem);
+}
+
+.contact-page__kicker {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  font-family: var(--font-accent);
+  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+}
+
+.contact-page__kicker::before,
+.contact-page__kicker::after {
+  content: "";
+  width: clamp(2.5rem, 6vw, 4.5rem);
+  height: 1px;
+  background: var(--accent);
+}
+
+.contact-page__grid {
     grid-template-columns: 0.8fr 1.2fr;
     gap: 4rem;
   }

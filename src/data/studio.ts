@@ -8,14 +8,15 @@ export const studio = {
   city: "Pune",
   phone: "+91 9270304552",
   phoneHref: "tel:+919270304552",
-  email: "madhvadesignstudio@gmail.com",
+  whatsappNumber: "919270304552",
+  email: "unmesh@madhvainteriors.com",
   instagramHandle: "@madhvainteriors",
   instagramUrl: "https://www.instagram.com/madhvainteriors",
   address: {
-    line1: "Shop No 234, Shri Ganesh Galaxy",
+    line1: "Shop No 233, Shri Ganesh Galaxy",
     line2: "Pune - Alandi Rd, near Gokhale Mala, Wadmukhwadi",
     line3: "Charholi Budruk, Pune, Pimpri-Chinchwad, Maharashtra 412105",
-    full: "Shop No 234, Shri Ganesh Galaxy, Pune - Alandi Rd, near Gokhale Mala, Wadmukhwadi, Charholi Budruk, Pune, Pimpri-Chinchwad, Maharashtra 412105",
+    full: "Shop No 233, Shri Ganesh Galaxy, Pune - Alandi Rd, near Gokhale Mala, Wadmukhwadi, Charholi Budruk, Pune, Pimpri-Chinchwad, Maharashtra 412105",
   },
   hours: "All days, 10:00 AM – 7:00 PM",
   // NOTE: placeholder production domain — replace once the studio's real
@@ -168,7 +169,7 @@ export const materials = [
 export const trustBadges = [
   "People's Choice Award",
   "Leading & Most Promising Interior Design Firm — 2025",
-  "50+ Interiors Delivered",
+  "Just Two Projects at a Time",
 ] as const;
 
 // Homepage hero slideshow. `motion` picks the Ken Burns move applied while

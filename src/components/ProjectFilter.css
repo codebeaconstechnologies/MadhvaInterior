@@ -5,6 +5,7 @@
 }
 
 .project-filter__btn {
+  font-family: var(--font-accent);
   background: transparent;
   border: 1px solid var(--border);
   color: var(--muted);

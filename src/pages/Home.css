@@ -14,6 +14,7 @@
 
 /* Trust badges */
 .home-badges__row {
+  font-family: var(--font-accent);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -153,18 +154,11 @@
 }
 
 .home-ba__facts span {
+  font-family: var(--font-accent);
   font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
-}
-
-/* Testimonials */
-.home-testimonial-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.75rem;
-  margin-top: clamp(2.5rem, 5vw, 3.5rem);
 }
 
 @media (min-width: 640px) {
@@ -177,10 +171,6 @@
   }
 
   .home-services-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .home-testimonial-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -211,9 +201,5 @@
 
   .home-services-grid {
     grid-template-columns: repeat(4, 1fr);
-  }
-
-  .home-testimonial-grid {
-    grid-template-columns: repeat(3, 1fr);
   }
 }

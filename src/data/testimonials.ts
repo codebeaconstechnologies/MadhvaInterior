@@ -5,6 +5,11 @@ export interface Testimonial {
   bhk: string;
   quote: string;
   photo: string;
+  // The source photos are social-media graphics with a border and a printed
+  // "BHK" tag, so each one carries a square crop (in source pixels) that
+  // frames just the client(s) for the round portraits.
+  photoWidth: number;
+  crop: { x: number; y: number; size: number };
 }
 
 export const testimonials: Testimonial[] = [
@@ -16,6 +21,8 @@ export const testimonials: Testimonial[] = [
     quote:
       "The quality of work, finishes & materials has been excellent. I never thought my home could look this incredible.",
     photo: "/images/testimonials/bhikaji-namrata.jpg",
+    photoWidth: 970,
+    crop: { x: 190, y: 40, size: 360 },
   },
   {
     id: "ganesh-pawar",
@@ -25,6 +32,8 @@ export const testimonials: Testimonial[] = [
     quote:
       "From creating the perfect layout to finding pieces I absolutely loved, my designer really took my space to the next level. I never dreamed my home could look — and feel — this good!",
     photo: "/images/testimonials/ganesh-pawar.jpg",
+    photoWidth: 970,
+    crop: { x: 470, y: 40, size: 320 },
   },
   {
     id: "ganesh-gudge",
@@ -34,6 +43,8 @@ export const testimonials: Testimonial[] = [
     quote:
       "Madhva Interiors Team gave us very good suggestions while executing the designs for our new home. We are very happy with the result.",
     photo: "/images/testimonials/ganesh-gudge.jpg",
+    photoWidth: 960,
+    crop: { x: 440, y: 60, size: 300 },
   },
   {
     id: "rushi-gayatri",
@@ -43,6 +54,8 @@ export const testimonials: Testimonial[] = [
     quote:
       "Excellent work from beginning to end — can work any angle from minimal help to complete project handling, professional without a doubt. Love it!",
     photo: "/images/testimonials/rushi-gayatri.jpg",
+    photoWidth: 970,
+    crop: { x: 420, y: 80, size: 380 },
   },
   {
     id: "devendra",
@@ -52,5 +65,7 @@ export const testimonials: Testimonial[] = [
     quote:
       "Madhva Interiors was very helpful when it came to designing a minimal but spacious home for us. We are happy with the results.",
     photo: "/images/testimonials/devendra.jpg",
+    photoWidth: 970,
+    crop: { x: 160, y: 70, size: 320 },
   },
 ];
