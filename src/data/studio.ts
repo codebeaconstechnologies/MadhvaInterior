@@ -9,7 +9,7 @@ export const studio = {
   phone: "+91 9270304552",
   phoneHref: "tel:+919270304552",
   whatsappNumber: "919270304552",
-  email: "madhvadesignstudio@gmail.com",
+  email: "support@madhvainteriors.com",
   instagramHandle: "@madhvainteriors",
   instagramUrl: "https://www.instagram.com/madhvainteriors",
   address: {

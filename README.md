@@ -67,7 +67,7 @@ using `.env.example` as a template:
 
 ```
 RESEND_API_KEY=re_your_real_key
-CONTACT_EMAIL=madhvadesignstudio@gmail.com
+CONTACT_EMAIL=support@madhvainteriors.com
 FROM_EMAIL=Madhva Interiors <enquiries@yourdomain.com>
 ```
 
@@ -96,7 +96,7 @@ sanity check.
 3. Create an API key (Resend → API Keys) — this is your `RESEND_API_KEY`.
 4. Decide on:
    - `FROM_EMAIL` — e.g. `Madhva Interiors <enquiries@yourdomain.com>` (must be on your verified domain)
-   - `CONTACT_EMAIL` — the studio inbox that should receive enquiries, e.g. `madhvadesignstudio@gmail.com` (this can be any inbox — it's just the recipient)
+   - `CONTACT_EMAIL` — the studio inbox that should receive enquiries, e.g. `support@madhvainteriors.com` (this can be any inbox — it's just the recipient)
 
 The contact form (`functions/api/contact.ts`) sends a formatted HTML email to
 `CONTACT_EMAIL`, from `FROM_EMAIL`, with `reply_to` set to the visitor's own
@@ -138,7 +138,7 @@ In the Cloudflare dashboard → your Pages project → **Settings** →
 | Variable | Type | Example |
 |---|---|---|
 | `RESEND_API_KEY` | Secret | `re_xxxxxxxxxxxxxxxx` |
-| `CONTACT_EMAIL` | Plaintext | `madhvadesignstudio@gmail.com` |
+| `CONTACT_EMAIL` | Plaintext | `support@madhvainteriors.com` |
 | `FROM_EMAIL` | Plaintext | `Madhva Interiors <enquiries@yourdomain.com>` |
 
 Redeploy after adding/changing environment variables (Cloudflare Pages does
