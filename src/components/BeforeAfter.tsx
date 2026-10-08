@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { beforeAfter } from "../data/studio";
+import { beforeAfter } from "../data/images";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 import "./BeforeAfter.css";
 
 export default function BeforeAfter() {
-  const [activeId, setActiveId] = useState(beforeAfter[0].id);
+  const [activeId, setActiveId] = useState(beforeAfter[0]?.id);
   const [position, setPosition] = useState(50);
   const [touched, setTouched] = useState(false);
   const { ref, isVisible } = useScrollReveal<HTMLDivElement>(0.35);
@@ -28,30 +28,35 @@ export default function BeforeAfter() {
     setTouched(true);
   };
 
+  // No complete before/after pairs in the folder yet.
+  if (!pair) return null;
+
   return (
     <div ref={ref} className={`ba${isVisible ? " is-visible" : ""}${touched ? " is-touched" : ""}`}>
-      <div className="ba__tabs" role="tablist" aria-label="Choose a room">
-        {beforeAfter.map((p) => (
-          <button
-            key={p.id}
-            type="button"
-            role="tab"
-            aria-selected={p.id === pair.id}
-            className={p.id === pair.id ? "is-active" : ""}
-            onClick={() => selectPair(p.id)}
-          >
-            {p.room}
-          </button>
-        ))}
-      </div>
+      {beforeAfter.length > 1 && (
+        <div className="ba__tabs" role="tablist" aria-label="Choose a room">
+          {beforeAfter.map((p) => (
+            <button
+              key={p.id}
+              type="button"
+              role="tab"
+              aria-selected={p.id === pair.id}
+              className={p.id === pair.id ? "is-active" : ""}
+              onClick={() => selectPair(p.id)}
+            >
+              {p.room}
+            </button>
+          ))}
+        </div>
+      )}
 
       <div className="ba__frame" style={{ ["--pos" as string]: `${position}%` }}>
         <img key={`${pair.id}-after`} className="ba__img ba__img--after" src={pair.after} alt={`${pair.room} after the Madhva makeover`} />
         <img
           key={`${pair.id}-before`}
-          className={`ba__img ba__img--before${pair.before ? "" : " ba__img--placeholder"}`}
-          src={pair.before ?? pair.after}
-          alt={pair.before ? `${pair.room} before — the empty flat as handed over` : ""}
+          className="ba__img ba__img--before"
+          src={pair.before}
+          alt={`${pair.room} before — the empty flat as handed over`}
         />
 
         <span className="ba__tag ba__tag--before">Before</span>

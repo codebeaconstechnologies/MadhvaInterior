@@ -33,7 +33,7 @@ export default function Seo({ title, description, path, image, type = "website" 
   useEffect(() => {
     const fullTitle = title.includes(studio.name) ? title : `${title} | ${studio.name}`;
     const url = `${studio.siteUrl}${path}`;
-    const ogImage = image ?? `${studio.siteUrl}/images/hero/hero-living-room.jpg`;
+    const ogImage = image ?? `${studio.siteUrl}/images/og-image.jpg`;
 
     document.title = fullTitle;
 

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Button from "./Button";
-import { studio, heroSlides } from "../data/studio";
+import { studio } from "../data/studio";
+import { heroSlides } from "../data/images";
 import "./Hero.css";
 
 const SLIDE_MS = 4000;

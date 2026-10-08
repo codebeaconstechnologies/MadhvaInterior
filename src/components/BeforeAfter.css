@@ -72,11 +72,6 @@
   transition: clip-path 0.85s var(--ease);
 }
 
-/* Stand-in until a real "before" photo is supplied — reads as a bare shell. */
-.ba__img--placeholder {
-  filter: grayscale(1) sepia(0.12) contrast(0.55) brightness(1.2) blur(3px);
-}
-
 @keyframes ba-fade {
   from { opacity: 0; }
   to { opacity: 1; }

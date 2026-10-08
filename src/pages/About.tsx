@@ -4,6 +4,7 @@ import CTASection from "../components/CTASection";
 import Reveal from "../components/Reveal";
 import ProcessTimeline from "../components/ProcessTimeline";
 import { studio, materials, whyChooseUs } from "../data/studio";
+import { aboutImages } from "../data/images";
 import "./About.css";
 
 export default function About() {
@@ -38,7 +39,7 @@ export default function About() {
         <div className="container about-story__grid">
           <Reveal className="about-story__image">
             <img
-              src="/images/studio/about-bedroom-render.jpg"
+              src={aboutImages.studio}
               alt="Warm, wood-paneled bedroom concept render by Madhva Interiors"
               loading="lazy"
             />
@@ -66,7 +67,7 @@ export default function About() {
         <div className="container about-founder__grid">
           <Reveal className="about-founder__image">
             <img
-              src="/images/studio/founder-unmesh-kadre.jpg"
+              src={aboutImages.founder}
               alt={`${studio.founder}, founder of Madhva Interiors & Design Studio`}
               loading="lazy"
             />

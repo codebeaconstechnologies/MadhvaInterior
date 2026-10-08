@@ -1,10 +1,16 @@
+import { getGallery, humanize } from "./images";
+
 export interface ProjectImage {
   src: string;
   alt: string;
 }
 
-export interface Project {
+// Project details. Photos are not listed here: they come from
+// src/assets/images/gallery/<id>/ (see ./images.ts), so `id` must match the
+// folder name. `coverRoom` picks the cover when there's no <id>_cover file.
+interface ProjectInfo {
   id: string;
+  coverRoom?: string;
   slug: string;
   title: string;
   category: string;
@@ -16,10 +22,13 @@ export interface Project {
   summary: string;
   description: string;
   highlights: string[];
-  cover: ProjectImage;
-  images: ProjectImage[];
   rooms?: { name: string; area: string }[];
   quote?: string;
+}
+
+export interface Project extends ProjectInfo {
+  cover: ProjectImage;
+  images: ProjectImage[];
 }
 
 export const categories = [
@@ -35,9 +44,10 @@ export const categories = [
 
 export type Category = (typeof categories)[number];
 
-export const projects: Project[] = [
+const projectInfo: ProjectInfo[] = [
   {
-    id: "smruti-garden-residence",
+    id: "smruti-garden",
+    coverRoom: "living",
     slug: "smruti-garden-residence",
     title: "Smruti Garden Residence",
     category: "Residential",
@@ -56,40 +66,6 @@ export const projects: Project[] = [
       "Warm ambient and cove lighting throughout",
       "Space-planned kitchen with island-style counter",
     ],
-    cover: {
-      src: "/images/projects/smruti-garden/livingroom-1.jpg",
-      alt: "Living room of the Smruti Garden 2BHK residence with warm wood paneling and cove lighting",
-    },
-    images: [
-      {
-        src: "/images/projects/smruti-garden/livingroom-1.jpg",
-        alt: "Living room with wood-paneled TV unit and beige sectional sofa",
-      },
-      {
-        src: "/images/projects/smruti-garden/bedroom-1.jpg",
-        alt: "Bedroom with backlit floral headboard panel and warm cove lighting",
-      },
-      {
-        src: "/images/projects/smruti-garden/kitchen-1.jpg",
-        alt: "Modern kitchen with wood island counter and pendant lighting",
-      },
-      {
-        src: "/images/projects/smruti-garden/livingroom-2.jpg",
-        alt: "Second living room angle with sofa, curtains, and gallery wall",
-      },
-      {
-        src: "/images/projects/smruti-garden/kitchen-2.jpg",
-        alt: "Kitchen cabinetry with under-cabinet lighting and open shelving",
-      },
-      {
-        src: "/images/projects/smruti-garden/washroom-1.jpg",
-        alt: "Washroom with round mirror, pendant lighting, and walk-in shower",
-      },
-      {
-        src: "/images/projects/smruti-garden/bedroom-2.jpg",
-        alt: "Second bedroom with air conditioning, roman blinds, and bedside lighting",
-      },
-    ],
     rooms: [
       { name: "Bedroom", area: "120 sq. ft." },
       { name: "Living Room", area: "200 sq. ft." },
@@ -100,6 +76,7 @@ export const projects: Project[] = [
   },
   {
     id: "walnut-residence",
+    coverRoom: "tvunit",
     slug: "walnut-residence",
     title: "The Walnut Residence",
     category: "Modern",
@@ -116,35 +93,10 @@ export const projects: Project[] = [
       "Bouclé-upholstered living room seating",
       "Matte green modular kitchen with walnut wall cabinetry",
     ],
-    cover: {
-      src: "/images/projects/walnut-residence/living-room-tv-wall.jpg",
-      alt: "Living room with a floating walnut-paneled TV wall and integrated soundbar",
-    },
-    images: [
-      {
-        src: "/images/projects/walnut-residence/living-room-tv-wall.jpg",
-        alt: "Living room with a floating walnut-paneled TV wall and integrated soundbar",
-      },
-      {
-        src: "/images/projects/walnut-residence/console-art.jpg",
-        alt: "Entryway console in walnut with abstract art and brass elephant figurines",
-      },
-      {
-        src: "/images/projects/walnut-residence/living-room-sofa.jpg",
-        alt: "Living room with a sage bouclé sofa and warm ambient lighting",
-      },
-      {
-        src: "/images/projects/walnut-residence/kitchen.jpg",
-        alt: "Modular kitchen with matte green cabinetry and walnut wall units",
-      },
-      {
-        src: "/images/projects/walnut-residence/entryway-kitchen.jpg",
-        alt: "Wood-slatted entryway opening onto a matte green kitchen",
-      },
-    ],
   },
   {
     id: "family-residence",
+    coverRoom: "master-bedroom",
     slug: "family-residence",
     title: "Family Residence",
     category: "Residential",
@@ -161,39 +113,9 @@ export const projects: Project[] = [
       "Scalloped upholstered headboard in the guest room",
       "Hand-textured plaster feature wall with botanical relief",
     ],
-    cover: {
-      src: "/images/projects/family-residence/master-bedroom.jpg",
-      alt: "Moody master bedroom with charcoal wainscoting and warm sconce lighting",
-    },
-    images: [
-      {
-        src: "/images/projects/family-residence/master-bedroom.jpg",
-        alt: "Moody master bedroom with charcoal wainscoting and warm sconce lighting",
-      },
-      {
-        src: "/images/projects/family-residence/master-bedroom-wardrobe.jpg",
-        alt: "Master bedroom wardrobe wall in cream and walnut with black trim detailing",
-      },
-      {
-        src: "/images/projects/family-residence/kids-room-desk.jpg",
-        alt: "Kids' room study nook with a floating walnut desk beneath a botanical mural",
-      },
-      {
-        src: "/images/projects/family-residence/guest-room.jpg",
-        alt: "Guest room with a scalloped striped headboard and gingham bedding",
-      },
-      {
-        src: "/images/projects/family-residence/bedroom-textured-wall.jpg",
-        alt: "Bedroom with a hand-textured plaster feature wall in a botanical relief pattern",
-      },
-      {
-        src: "/images/projects/family-residence/wardrobe-mirror.jpg",
-        alt: "Bedroom wardrobe with full-height mirror and backlit open shelving",
-      },
-    ],
   },
   {
-    id: "luxury-style",
+    id: "luxury",
     slug: "luxury-style",
     title: "The Luxury Collection",
     category: "Luxury",
@@ -209,27 +131,9 @@ export const projects: Project[] = [
       "Rich colors with bold accents",
       "Technology seamlessly integrated",
     ],
-    cover: {
-      src: "/images/projects/luxury/cover.jpg",
-      alt: "Luxury style living room with marble feature wall and gold accents",
-    },
-    images: [
-      {
-        src: "/images/projects/luxury/bedroom.jpg",
-        alt: "Luxury bedroom with marble headboard wall and warm pendant lighting",
-      },
-      {
-        src: "/images/projects/luxury/kitchen.jpg",
-        alt: "Luxury kitchen with dark marble backsplash and integrated lighting",
-      },
-      {
-        src: "/images/projects/luxury/livingroom.jpg",
-        alt: "Luxury living room with crystal chandelier and framed artwork",
-      },
-    ],
   },
   {
-    id: "minimalist-style",
+    id: "minimalist",
     slug: "minimalist-style",
     title: "The Minimalist Collection",
     category: "Minimalist",
@@ -245,27 +149,9 @@ export const projects: Project[] = [
       "Lots of natural light",
       "Functional, essential furniture",
     ],
-    cover: {
-      src: "/images/projects/minimalist/cover.jpg",
-      alt: "Minimalist style bedroom with neutral tones and clean lines",
-    },
-    images: [
-      {
-        src: "/images/projects/minimalist/bedroom.jpg",
-        alt: "Minimalist bedroom with marble feature wall and floating bed frame",
-      },
-      {
-        src: "/images/projects/minimalist/kitchen.jpg",
-        alt: "Minimalist kitchen with light cabinetry and dining nook",
-      },
-      {
-        src: "/images/projects/minimalist/livingroom.jpg",
-        alt: "Minimalist living room in soft neutral tones",
-      },
-    ],
   },
   {
-    id: "modern-style",
+    id: "modern",
     slug: "modern-style",
     title: "The Modern Collection",
     category: "Modern",
@@ -280,27 +166,9 @@ export const projects: Project[] = [
       "Open layouts with natural light",
       "Innovative materials: glass, metal, concrete",
     ],
-    cover: {
-      src: "/images/projects/modern/cover.jpg",
-      alt: "Modern style living room with ring pendant light and large windows",
-    },
-    images: [
-      {
-        src: "/images/projects/modern/bedroom.jpg",
-        alt: "Modern bedroom with marble accent wall and warm wood tones",
-      },
-      {
-        src: "/images/projects/modern/kitchen.jpg",
-        alt: "Modern kitchen with glossy cabinetry and pendant lighting",
-      },
-      {
-        src: "/images/projects/modern/livingroom.jpg",
-        alt: "Modern living room with round pendant light and garden view",
-      },
-    ],
   },
   {
-    id: "scandinavian-style",
+    id: "scandinavian",
     slug: "scandinavian-style",
     title: "The Scandinavian Collection",
     category: "Scandinavian",
@@ -315,27 +183,9 @@ export const projects: Project[] = [
       "Warm, approachable aesthetics",
       "Light colors and natural materials",
     ],
-    cover: {
-      src: "/images/projects/scandinavian/cover.jpg",
-      alt: "Scandinavian style bedroom with light wood paneling and brass chandelier",
-    },
-    images: [
-      {
-        src: "/images/projects/scandinavian/bedroom.jpg",
-        alt: "Scandinavian bedroom with botanical art and green accents",
-      },
-      {
-        src: "/images/projects/scandinavian/kitchen.jpg",
-        alt: "Scandinavian kitchen with light cabinetry and dining table",
-      },
-      {
-        src: "/images/projects/scandinavian/livingroom.jpg",
-        alt: "Scandinavian living room with warm lighting and wood ceiling detail",
-      },
-    ],
   },
   {
-    id: "traditional-style",
+    id: "traditional",
     slug: "traditional-style",
     title: "The Traditional Collection",
     category: "Traditional",
@@ -351,27 +201,9 @@ export const projects: Project[] = [
       "Symmetry and balanced layouts",
       "Decorative moldings and woodwork",
     ],
-    cover: {
-      src: "/images/projects/traditional/cover.jpg",
-      alt: "Traditional style bedroom with ornate gold wall decor",
-    },
-    images: [
-      {
-        src: "/images/projects/traditional/bedroom.jpg",
-        alt: "Traditional bedroom with gold floral wall art and tufted bench",
-      },
-      {
-        src: "/images/projects/traditional/kitchen.jpg",
-        alt: "Traditional kitchen with patterned backsplash and pooja shelf",
-      },
-      {
-        src: "/images/projects/traditional/livingroom.jpg",
-        alt: "Traditional living room with wood-paneled TV unit and crystal chandelier",
-      },
-    ],
   },
   {
-    id: "rustic-style",
+    id: "rustic",
     slug: "rustic-style",
     title: "The Rustic Collection",
     category: "Rustic",
@@ -387,26 +219,16 @@ export const projects: Project[] = [
       "Warm, earthy colors",
       "Raw, unfinished wood",
     ],
-    cover: {
-      src: "/images/projects/rustic/cover.jpg",
-      alt: "Rustic style bedroom with slatted wood wall and warm lighting",
-    },
-    images: [
-      {
-        src: "/images/projects/rustic/bedroom.jpg",
-        alt: "Rustic bedroom with wood-slat feature wall and warm lantern lighting",
-      },
-      {
-        src: "/images/projects/rustic/kitchen.jpg",
-        alt: "Rustic kitchen with dark cabinetry and marble backsplash",
-      },
-      {
-        src: "/images/projects/rustic/livingroom.jpg",
-        alt: "Rustic living room with carved wood ceiling medallion",
-      },
-    ],
   },
 ];
+
+export const projects: Project[] = projectInfo.map((info) => {
+  const images = getGallery(info.id, info.coverRoom).map((img) => ({
+    src: img.src,
+    alt: `${humanize(img.room)} — ${info.title} by Madhva Interiors`,
+  }));
+  return { ...info, cover: images[0] ?? { src: "/images/og-image.jpg", alt: info.title }, images };
+});
 
 export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
