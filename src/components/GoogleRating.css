@@ -28,25 +28,6 @@
   line-height: 1;
 }
 
-.google-rating__count {
-  color: var(--muted);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-color: var(--border);
-}
-
-/* Footer variant on navy */
-.google-rating--dark {
-  background: transparent;
-  border-color: rgba(243, 236, 225, 0.2);
-  color: var(--on-dark);
-}
-
-.google-rating--dark .google-rating__count {
-  color: var(--on-dark-muted);
-  text-decoration-color: rgba(243, 236, 225, 0.3);
-}
-
 /* ---------- Stars ---------- */
 .stars {
   position: relative;
@@ -58,10 +39,6 @@
 
 .stars__base {
   color: var(--border);
-}
-
-.google-rating--dark .stars__base {
-  color: rgba(243, 236, 225, 0.25);
 }
 
 .stars__fill {

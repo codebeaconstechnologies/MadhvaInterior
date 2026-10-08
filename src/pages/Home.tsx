@@ -7,7 +7,6 @@ import Button from "../components/Button";
 import Reveal from "../components/Reveal";
 import Testimonials from "../components/Testimonials";
 import GoogleRating from "../components/GoogleRating";
-import GoogleReviews from "../components/GoogleReviews";
 import BeforeAfter from "../components/BeforeAfter";
 import Promises from "../components/Promises";
 import { projects } from "../data/projects";
@@ -210,9 +209,6 @@ export default function Home() {
           </Reveal>
           <Reveal>
             <Testimonials />
-          </Reveal>
-          <Reveal>
-            <GoogleReviews />
           </Reveal>
         </div>
       </section>
