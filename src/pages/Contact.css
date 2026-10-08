@@ -117,38 +117,47 @@
   padding: clamp(1.5rem, 4vw, 2.75rem);
 }
 
-@media (min-width: 900px) {
-  /* Page kicker centred in the band above the grid, framed by gold rules */
-.contact-page.section {
-  padding-top: clamp(2.5rem, 5vw, 4rem);
+/* Map */
+.contact-map__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem 2rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
 }
 
-.contact-page__header {
-  display: flex;
-  justify-content: center;
-  margin-bottom: clamp(2rem, 4vw, 3.25rem);
+.contact-map__title {
+  margin-top: 0.6rem;
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
 }
 
-.contact-page__kicker {
+.contact-map__actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 1.25rem;
-  font-family: var(--font-accent);
-  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--accent-strong);
+  gap: 1rem;
 }
 
-.contact-page__kicker::before,
-.contact-page__kicker::after {
-  content: "";
-  width: clamp(2.5rem, 6vw, 4.5rem);
-  height: 1px;
-  background: var(--accent);
+.contact-map__frame {
+  position: relative;
+  aspect-ratio: 16 / 7;
+  min-height: 320px;
+  border: 1px solid var(--border);
+  background: var(--muted-bg);
+  overflow: hidden;
 }
 
-.contact-page__grid {
+.contact-map__frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@media (min-width: 900px) {
+  .contact-page__grid {
     grid-template-columns: 0.8fr 1.2fr;
     gap: 4rem;
   }

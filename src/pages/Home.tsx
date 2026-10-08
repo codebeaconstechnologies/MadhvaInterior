@@ -6,6 +6,8 @@ import CTASection from "../components/CTASection";
 import Button from "../components/Button";
 import Reveal from "../components/Reveal";
 import Testimonials from "../components/Testimonials";
+import GoogleRating from "../components/GoogleRating";
+import GoogleReviews from "../components/GoogleReviews";
 import BeforeAfter from "../components/BeforeAfter";
 import Promises from "../components/Promises";
 import { projects } from "../data/projects";
@@ -202,9 +204,15 @@ export default function Home() {
               description="Real homes, real families — in their own words."
               align="center"
             />
+            <div className="home-google-rating">
+              <GoogleRating />
+            </div>
           </Reveal>
           <Reveal>
             <Testimonials />
+          </Reveal>
+          <Reveal>
+            <GoogleReviews />
           </Reveal>
         </div>
       </section>

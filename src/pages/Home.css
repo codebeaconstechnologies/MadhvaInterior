@@ -26,6 +26,13 @@
   color: var(--muted);
 }
 
+/* Google rating under the testimonials heading */
+.home-google-rating {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
 /* Featured grid */
 .home-featured-grid {
   display: grid;

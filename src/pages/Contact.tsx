@@ -2,6 +2,8 @@ import Seo from "../components/Seo";
 import ContactForm from "../components/ContactForm";
 import Reveal from "../components/Reveal";
 import Icon from "../components/Icon";
+import GoogleRating from "../components/GoogleRating";
+import { google } from "../data/google";
 import { studio } from "../data/studio";
 import "./Contact.css";
 
@@ -86,6 +88,32 @@ export default function Contact() {
 
           <Reveal delay={100} className="contact-page__form-wrap">
             <ContactForm />
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="contact-map section--tight section--muted">
+        <div className="container">
+          <Reveal className="contact-map__head">
+            <div>
+              <span className="eyebrow">Visit the Studio</span>
+              <h2 className="contact-map__title">Find us on Pune – Alandi Road</h2>
+            </div>
+            <div className="contact-map__actions">
+              <GoogleRating />
+              <a href={google.directionsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                Get Directions
+              </a>
+            </div>
+          </Reveal>
+          <Reveal className="contact-map__frame">
+            <iframe
+              src={google.mapEmbedUrl}
+              title={`${studio.fullName} on Google Maps`}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
           </Reveal>
         </div>
       </section>
