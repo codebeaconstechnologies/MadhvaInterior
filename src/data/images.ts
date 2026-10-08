@@ -84,11 +84,11 @@ export const heroSlides = Object.keys(heroFiles)
 // still show, labelled "Room N".
 export const beforeAfterRooms: Record<number, { room: string; caption: string }> = {
   1: { room: "Living Room", caption: "A bare, handed-over living room turned into a layered, elegant family lounge." },
-  2: { room: "Bedroom", caption: "An empty bedroom given warm panelling, soft lighting and a calm palette." },
-  3: { room: "Kitchen", caption: "A plain utility space rebuilt as a modular kitchen with generous storage." },
-  4: { room: "Entrance", caption: "A blank entryway turned into a welcoming foyer that sets the tone for the home." },
-  5: { room: "Bathroom", caption: "A basic washroom reworked with premium finishes and smart storage." },
-  6: { room: "Study", caption: "An unused corner turned into a quiet, functional workspace." },
+  2: { room: "TV Unit", caption: "A bare living-room wall turned into a marble-backed TV unit with lit display shelves." },
+  3: { room: "Entrance", caption: "A plain entryway turned into a welcoming foyer with a green feature wall and shoe storage." },
+  4: { room: "Bedroom", caption: "An empty bedroom given warm panelling, soft lighting and a calm palette." },
+  5: { room: "Kitchen", caption: "A plain utility space rebuilt as a modular kitchen with generous storage." },
+  6: { room: "Bathroom", caption: "A basic washroom reworked with premium finishes and smart storage." },
 };
 
 export const beforeAfter = (() => {

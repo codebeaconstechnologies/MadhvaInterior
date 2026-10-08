@@ -7,7 +7,7 @@ Use `.jpg` (or `.png` / `.webp`), ideally under ~400 KB and about 1600–2000 px
 | Folder | What it's for | File names |
 |---|---|---|
 | `hero/` | Home page slideshow (zoom / pan transitions run automatically) | `01_living-room.jpg`, `02_modular-kitchen.jpg` … The number sets the order; the rest becomes the caption on the slide. |
-| `before-after/` | Home page "before & after" slider | `1_before.jpg` + `1_after.jpg`, `2_before.jpg` + `2_after.jpg` … Both photos of a pair must be the same room, same angle, same size. A pair shows only once both files exist. Room names per number are set in `src/data/images.ts` (`beforeAfterRooms`): 1 Living Room, 2 Bedroom, 3 Kitchen, 4 Entrance, 5 Bathroom, 6 Study. |
+| `before-after/` | Home page "before & after" slider | `1_before.jpg` + `1_after.jpg`, `2_before.jpg` + `2_after.jpg` … Both photos of a pair must be the same room, same angle, same size. A pair shows only once both files exist. Room names per number are set in `src/data/images.ts` (`beforeAfterRooms`): 1 Living Room, 2 TV Unit, 3 Entrance, 4 Bedroom, 5 Kitchen, 6 Bathroom. |
 | `gallery/<projectId>/` | Project cards, project pages and their photo grid | `<projectId>_<room>.jpg`, e.g. `smruti-garden_kitchen.jpg`, `smruti-garden_tvunit.jpg`. More shots of one room: `smruti-garden_kitchen-2.jpg`. Optional `<projectId>_cover.jpg` becomes the cover photo. |
 | `about/` | About page | `founder.jpg` (founder portrait), `studio.jpg` (story section image) |
 
