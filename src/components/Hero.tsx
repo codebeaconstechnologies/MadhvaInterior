@@ -105,11 +105,15 @@ export default function Hero() {
 
       <div className="hero__panel">
         <div className={`hero__content${mounted ? " is-in" : ""}`}>
-          <span className="eyebrow eyebrow--on-dark hero__eyebrow">{studio.subtagline}</span>
-          <h1>{studio.tagline}</h1>
+          {/* The label sits inside the h1 so search engines read the heading as
+              "Interior Designers in Pune — Your Dream Interiors…". */}
+          <h1>
+            <span className="eyebrow eyebrow--on-dark hero__eyebrow">Interior Designers in Pune</span>{" "}
+            {studio.tagline}
+          </h1>
           <p className="hero__lede">
-            A Pune-based interior design studio crafting elegant, functional, and timeless
-            spaces — built around the way you actually live.
+            A Pune-based studio designing residential and commercial interiors that are
+            elegant, functional, and timeless — built around the way you actually live.
           </p>
           <div className="hero__actions">
             <Button to="/gallery" variant="outline-dark">
