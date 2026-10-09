@@ -6,6 +6,7 @@ import Reveal from "../components/Reveal";
 import Lightbox from "../components/Lightbox";
 import CTASection from "../components/CTASection";
 import { getProjectBySlug, projects } from "../data/projects";
+import { studio } from "../data/studio";
 import "./ProjectDetail.css";
 
 export default function ProjectDetail() {
@@ -27,7 +28,7 @@ export default function ProjectDetail() {
         title={project.title}
         description={project.summary}
         path={`/gallery/${project.slug}`}
-        image={`https://www.madhvainteriors.com${project.cover.src}`}
+        image={`${studio.siteUrl}${project.cover.src}`}
       />
 
       {/* Hero */}

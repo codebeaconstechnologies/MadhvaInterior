@@ -18,7 +18,7 @@ export default function Gallery() {
   return (
     <>
       <Seo
-        title="Gallery"
+        title="Interior Design Portfolio — Homes in Pune"
         description="Browse Madhva Interiors' portfolio of residential interior projects across Luxury, Minimalist, Modern, Scandinavian, Traditional, and Rustic design styles."
         path="/gallery"
       />

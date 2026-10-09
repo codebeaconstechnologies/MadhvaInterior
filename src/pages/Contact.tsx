@@ -11,7 +11,7 @@ export default function Contact() {
   return (
     <>
       <Seo
-        title="Contact"
+        title="Contact Our Pune Interior Design Studio"
         description="Get in touch with Madhva Interiors & Design Studio in Pune. Call, email, or send an enquiry to start your interior design project."
         path="/contact"
       />

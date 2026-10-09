@@ -8,6 +8,7 @@ export default function NotFound() {
         title="Page Not Found"
         description="The page you're looking for doesn't exist."
         path="/404"
+        noindex
       />
       <section className="section" style={{ textAlign: "center" }}>
         <div className="container" style={{ display: "flex", flexDirection: "column", gap: "1.5rem", alignItems: "center" }}>

@@ -11,7 +11,7 @@ export default function About() {
   return (
     <>
       <Seo
-        title="About the Studio"
+        title="About Us — Interior Designers in Pune"
         description="Madhva Interiors & Design Studio is a Pune-based interior design firm founded by Unmesh Kadre, creating elegant, functional, and timeless spaces."
         path="/about"
       />

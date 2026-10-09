@@ -1,13 +1,5 @@
-import { useEffect } from "react";
-import { studio } from "../data/studio";
-
-interface SeoProps {
-  title: string;
-  description: string;
-  path: string;
-  image?: string;
-  type?: "website" | "article";
-}
+import { useContext, useEffect } from "react";
+import { SeoCollector, seoTags, type SeoProps } from "../lib/seo";
 
 function setMeta(attr: "name" | "property", key: string, content: string) {
   let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
@@ -19,39 +11,31 @@ function setMeta(attr: "name" | "property", key: string, content: string) {
   el.setAttribute("content", content);
 }
 
-function setLink(rel: string, href: string) {
-  let el = document.head.querySelector<HTMLLinkElement>(`link[rel="${rel}"]`);
+function setCanonical(href: string | undefined) {
+  let el = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  if (!href) {
+    el?.remove();
+    return;
+  }
   if (!el) {
     el = document.createElement("link");
-    el.setAttribute("rel", rel);
+    el.setAttribute("rel", "canonical");
     document.head.appendChild(el);
   }
   el.setAttribute("href", href);
 }
 
-export default function Seo({ title, description, path, image, type = "website" }: SeoProps) {
+export default function Seo(props: SeoProps) {
+  const collect = useContext(SeoCollector);
+  const { title, description, path, image, type, noindex } = props;
+  collect?.(seoTags(props));
+
   useEffect(() => {
-    const fullTitle = title.includes(studio.name) ? title : `${title} | ${studio.name}`;
-    const url = `${studio.siteUrl}${path}`;
-    const ogImage = image ?? `${studio.siteUrl}/images/og-image.jpg`;
-
-    document.title = fullTitle;
-
-    setMeta("name", "description", description);
-    setLink("canonical", url);
-
-    setMeta("property", "og:title", fullTitle);
-    setMeta("property", "og:description", description);
-    setMeta("property", "og:url", url);
-    setMeta("property", "og:type", type);
-    setMeta("property", "og:image", ogImage);
-    setMeta("property", "og:site_name", studio.fullName);
-
-    setMeta("name", "twitter:card", "summary_large_image");
-    setMeta("name", "twitter:title", fullTitle);
-    setMeta("name", "twitter:description", description);
-    setMeta("name", "twitter:image", ogImage);
-  }, [title, description, path, image, type]);
+    const tags = seoTags({ title, description, path, image, type, noindex });
+    document.title = tags.title;
+    tags.meta.forEach((m) => setMeta(m.attr, m.key, m.content));
+    setCanonical(tags.canonical);
+  }, [title, description, path, image, type, noindex]);
 
   return null;
 }

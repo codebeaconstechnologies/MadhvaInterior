@@ -19,8 +19,7 @@ export const studio = {
     full: "Shop No 233, Shri Ganesh Galaxy, Pune - Alandi Rd, near Gokhale Mala, Wadmukhwadi, Charholi Budruk, Pune, Pimpri-Chinchwad, Maharashtra 412105",
   },
   hours: "All days, 10:00 AM – 7:00 PM",
-  // NOTE: placeholder production domain — replace once the studio's real
-  // domain is registered, then update index.html canonical logic + sitemap.xml.
+  // Canonical host. Also used in index.html, functions/_middleware.ts and scripts/prerender.mjs.
   siteUrl: "https://www.madhvainteriors.com",
 } as const;
 

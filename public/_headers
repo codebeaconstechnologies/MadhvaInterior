@@ -1,0 +1,7 @@
+# The pages.dev copies of the site (and per-deploy preview links) stay out of
+# search results; only www.madhvainteriors.com should be indexed.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex
