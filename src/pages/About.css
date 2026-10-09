@@ -38,13 +38,22 @@
   align-items: center;
 }
 
+/* Edges feather into the section background instead of a hard frame. */
 .about-founder__image img {
   width: 100%;
-  max-width: 22rem;
-  aspect-ratio: 3 / 4;
+  max-width: 26rem;
+  aspect-ratio: 1;
   object-fit: cover;
-  object-position: top center;
+  object-position: center top;
   margin-inline: auto;
+  -webkit-mask-image:
+    linear-gradient(to right, transparent, #000 18%, #000 82%, transparent),
+    linear-gradient(to bottom, transparent, #000 14%, #000 80%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent, #000 18%, #000 82%, transparent),
+    linear-gradient(to bottom, transparent, #000 14%, #000 80%, transparent);
+  mask-composite: intersect;
 }
 
 .about-founder__copy {
