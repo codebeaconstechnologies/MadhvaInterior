@@ -41,8 +41,8 @@ export default function Header() {
         <NavLink to="/" className="site-header__logo" aria-label={`${studio.fullName} — home`}>
           <img src="/images/studio/logo-icon.png" alt="" width="44" height="44" />
           <span>
-            <span className="site-header__logo-name">madhva</span>
-            <span className="site-header__logo-suffix">interiors</span>
+            <span className="site-header__logo-name">Madhva</span>{" "}
+            <span className="site-header__logo-suffix">Interiors</span>
           </span>
         </NavLink>
 
