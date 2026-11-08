@@ -1,13 +1,20 @@
 import { useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import Seo from "../components/Seo";
 import Button from "../components/Button";
 import Reveal from "../components/Reveal";
 import Lightbox from "../components/Lightbox";
 import CTASection from "../components/CTASection";
 import { getProjectBySlug, projects } from "../data/projects";
-import { studio } from "../data/studio";
+import { getServiceBySlug } from "../data/services";
+import Breadcrumbs from "../components/Breadcrumbs";
+import SectionHeading from "../components/SectionHeading";
+import { BUSINESS_ID, absoluteUrl } from "../lib/seo";
+import { responsive } from "../lib/images";
 import "./ProjectDetail.css";
+
+// Style collections link to these; client projects list their own (src/data/projects.ts).
+const DEFAULT_SERVICES = ["home-interior-design-pune", "modular-kitchen-design-pune", "wardrobe-design-pune"];
 
 export default function ProjectDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -21,21 +28,48 @@ export default function ProjectDetail() {
   const currentIndex = projects.findIndex((p) => p.id === project.id);
   const prevProject = projects[(currentIndex - 1 + projects.length) % projects.length];
   const nextProject = projects[(currentIndex + 1) % projects.length];
+  const path = `/gallery/${project.slug}`;
+  const relatedServices = (project.services ?? DEFAULT_SERVICES).map(getServiceBySlug).filter((s) => s !== undefined);
 
   return (
     <>
       <Seo
-        title={project.title}
-        description={project.summary}
-        path={`/gallery/${project.slug}`}
-        image={`${studio.siteUrl}${project.cover.src}`}
+        title={`${project.title} — ${project.bhk ? `${project.bhk} ` : ""}Interior Design, ${project.location}`}
+        description={`${project.summary} ${project.bhk ? `${project.bhk} ` : ""}interior design${
+          project.category === "Residential" || project.bhk ? "" : ` in the ${project.category.toLowerCase()} style`
+        } by Madhva Interiors, ${project.location}.`}
+        path={path}
+        image={project.cover.src}
+        breadcrumbs={[
+          { name: "Projects", path: "/gallery" },
+          { name: project.title, path },
+        ]}
+        schema={[
+          {
+            "@type": "CreativeWork",
+            "@id": `${absoluteUrl(path)}#project`,
+            name: project.title,
+            description: project.description,
+            image: project.images.slice(0, 6).map((img) => absoluteUrl(img.src)),
+            creator: { "@id": BUSINESS_ID },
+            locationCreated: { "@type": "Place", name: project.location },
+            dateCreated: project.year,
+          },
+        ]}
       />
 
       {/* Hero */}
       <section className="pd-hero">
-        <img src={project.cover.src} alt={project.cover.alt} {...{ fetchpriority: "high" }} />
+        <img {...responsive(project.cover.src)} alt={project.cover.alt} {...{ fetchpriority: "high" }} />
         <div className="pd-hero__scrim" />
         <div className="container pd-hero__content">
+          <Breadcrumbs
+            onDark
+            trail={[
+              { name: "Projects", path: "/gallery" },
+              { name: project.title, path },
+            ]}
+          />
           <span className="eyebrow eyebrow--on-dark">{project.category} Style</span>
           <h1>{project.title}</h1>
           <p className="pd-hero__meta">
@@ -89,7 +123,7 @@ export default function ProjectDetail() {
 
             {project.rooms && (
               <div className="pd-rooms">
-                <h4>Room Breakdown</h4>
+                <h3 className="pd-rooms__title">Room Breakdown</h3>
                 <ul>
                   {project.rooms.map((r) => (
                     <li key={r.name}>
@@ -111,7 +145,7 @@ export default function ProjectDetail() {
             {project.images.map((img, i) => (
               <Reveal key={img.src} delay={(i % 4) * 60} className="pd-grid__item">
                 <button onClick={() => setLightboxIndex(i)} aria-label={`View larger image: ${img.alt}`}>
-                  <img src={img.src} alt={img.alt} loading="lazy" decoding="async" />
+                  <img {...responsive(img.src, "(min-width: 960px) 33vw, 50vw")} alt={img.alt} loading="lazy" decoding="async" />
                 </button>
               </Reveal>
             ))}
@@ -126,6 +160,24 @@ export default function ProjectDetail() {
           onClose={() => setLightboxIndex(null)}
           onNavigate={setLightboxIndex}
         />
+      )}
+
+      {relatedServices.length > 0 && (
+        <section className="section--tight section--surface">
+          <div className="container">
+            <SectionHeading eyebrow="Services" title="Services in this project" />
+            <ul className="link-cards">
+              {relatedServices.map((s) => (
+                <li key={s.slug}>
+                  <Link to={`/services/${s.slug}`}>
+                    <strong>{s.name}</strong>
+                    <span>{s.summary}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
       )}
 
       {/* Prev / Next */}

@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import { studio } from "../data/studio";
+import { services } from "../data/services";
+import { locations } from "../data/locations";
+import { responsive } from "../lib/images";
 import Icon from "./Icon";
 import "./Footer.css";
 
@@ -9,7 +12,7 @@ export default function Footer() {
       <div className="container site-footer__grid">
         <div className="site-footer__brand">
           <Link to="/" className="site-footer__logo" aria-label={`${studio.fullName} — home`}>
-            <img src="/images/studio/logo-lockup-dark.png" alt={studio.fullName} />
+            <img {...responsive("/images/studio/logo-lockup-dark.png", "136px")} alt={studio.fullName} loading="lazy" />
           </Link>
           <div className="site-footer__brand-text">
             <p className="site-footer__tagline">Design with Dignity &amp; Values</p>
@@ -21,16 +24,22 @@ export default function Footer() {
         </div>
 
         <nav className="site-footer__col" aria-label="Footer navigation">
-          <h4>Studio</h4>
+          <h2 className="site-footer__heading">Studio</h2>
           <ul>
             <li>
               <Link to="/">Home</Link>
             </li>
             <li>
+              <Link to="/services">Services</Link>
+            </li>
+            <li>
+              <Link to="/gallery">Projects</Link>
+            </li>
+            <li>
               <Link to="/about">About</Link>
             </li>
             <li>
-              <Link to="/gallery">Gallery</Link>
+              <Link to="/blog">Blog</Link>
             </li>
             <li>
               <Link to="/contact">Contact</Link>
@@ -39,7 +48,7 @@ export default function Footer() {
         </nav>
 
         <div className="site-footer__col">
-          <h4>Get in Touch</h4>
+          <h2 className="site-footer__heading">Get in Touch</h2>
           <ul className="site-footer__contact">
             <li>
               <a href={studio.phoneHref}>
@@ -69,7 +78,7 @@ export default function Footer() {
         </div>
 
         <div className="site-footer__col">
-          <h4>Visit</h4>
+          <h2 className="site-footer__heading">Visit</h2>
           <address className="site-footer__contact">
             <Icon name="pin" className="site-footer__icon" />
             <span>
@@ -81,6 +90,29 @@ export default function Footer() {
             </span>
           </address>
         </div>
+      </div>
+
+      <div className="container site-footer__links">
+        <nav aria-label="Services">
+          <h2 className="site-footer__heading">Services</h2>
+          <ul>
+            {services.map((s) => (
+              <li key={s.slug}>
+                <Link to={`/services/${s.slug}`}>{s.name}</Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <nav aria-label="Areas we serve">
+          <h2 className="site-footer__heading">Areas</h2>
+          <ul>
+            {locations.map((l) => (
+              <li key={l.slug}>
+                <Link to={`/locations/${l.slug}`}>Interior Designer in {l.area}</Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
 
       <div className="container site-footer__bottom">

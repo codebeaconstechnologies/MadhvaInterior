@@ -12,16 +12,18 @@ export default function Contact() {
     <>
       <Seo
         title="Contact Our Pune Interior Design Studio"
-        description="Get in touch with Madhva Interiors & Design Studio in Pune. Call, email, or send an enquiry to start your interior design project."
+        description="Contact Madhva Interiors, interior designers in Pune. Call or WhatsApp +91 92703 04552, send an enquiry, or visit our studio on Pune–Alandi Road, Charholi Budruk."
         path="/contact"
+        pageType="ContactPage"
+        breadcrumbs={[{ name: "Contact", path: "/contact" }]}
       />
 
       <section className="contact-page section">
-        <Reveal className="container contact-page__header">
+        <Reveal immediate className="container contact-page__header">
           <span className="contact-page__kicker">Get in Touch</span>
         </Reveal>
         <div className="container contact-page__grid">
-          <Reveal className="contact-page__info">
+          <Reveal immediate className="contact-page__info">
             <h1 className="contact-page__title">Let&rsquo;s create something considered.</h1>
             <p className="lede">
               Tell us about your space and we&rsquo;ll get back to you to schedule a
@@ -86,7 +88,7 @@ export default function Contact() {
             </dl>
           </Reveal>
 
-          <Reveal delay={100} className="contact-page__form-wrap">
+          <Reveal immediate delay={100} className="contact-page__form-wrap">
             <ContactForm />
           </Reveal>
         </div>

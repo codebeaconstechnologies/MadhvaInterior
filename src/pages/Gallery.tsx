@@ -21,11 +21,13 @@ export default function Gallery() {
         title="Interior Design Portfolio — Homes in Pune"
         description="Browse Madhva Interiors' portfolio of residential interior projects across Luxury, Minimalist, Modern, Scandinavian, Traditional, and Rustic design styles."
         path="/gallery"
+        pageType="CollectionPage"
+        breadcrumbs={[{ name: "Projects", path: "/gallery" }]}
       />
 
       <section className="gallery-intro section--tight section--surface">
         <div className="container">
-          <Reveal>
+          <Reveal immediate>
             <span className="eyebrow">Portfolio</span>
             <h1 className="gallery-intro__title">Our Gallery</h1>
             <p className="lede">
@@ -38,7 +40,7 @@ export default function Gallery() {
 
       <section className="section--tight section--surface gallery-list">
         <div className="container">
-          <Reveal className="gallery-list__filter">
+          <Reveal immediate className="gallery-list__filter">
             <ProjectFilter active={active} onChange={setActive} />
           </Reveal>
           <div className="gallery-list__grid">

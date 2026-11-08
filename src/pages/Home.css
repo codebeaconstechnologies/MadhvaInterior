@@ -210,3 +210,45 @@
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+/* Service cards link to their service pages */
+.home-service-card__link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.home-service-card__link:hover h3 {
+  color: var(--accent-strong);
+}
+
+.home-services-more {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem 1.4rem;
+  margin-top: 2rem;
+  font-size: 0.95rem;
+}
+
+.home-services-more span {
+  font-family: var(--font-accent);
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.home-services-more a {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 5px;
+}
+
+.home-services-more a:hover {
+  color: var(--accent-strong);
+}
+
+.home-services-more__all {
+  color: var(--terracotta);
+}

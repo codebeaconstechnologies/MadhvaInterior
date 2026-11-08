@@ -24,6 +24,8 @@ interface ProjectInfo {
   highlights: string[];
   rooms?: { name: string; area: string }[];
   quote?: string;
+  /** Service page slugs (src/data/services.ts) this project demonstrates. */
+  services?: string[];
 }
 
 export interface Project extends ProjectInfo {
@@ -73,6 +75,7 @@ const projectInfo: ProjectInfo[] = [
     ],
     quote:
       "The quality of work, finishes & materials has been excellent. I never thought my home could look this incredible.",
+    services: ["2bhk-interior-design-pune", "modular-kitchen-design-pune", "wardrobe-design-pune"],
   },
   {
     id: "walnut-residence",
@@ -93,6 +96,7 @@ const projectInfo: ProjectInfo[] = [
       "Bouclé-upholstered living room seating",
       "Matte green modular kitchen with walnut wall cabinetry",
     ],
+    services: ["home-interior-design-pune", "modular-kitchen-design-pune", "turnkey-interior-design-pune"],
   },
   {
     id: "family-residence",
@@ -113,6 +117,7 @@ const projectInfo: ProjectInfo[] = [
       "Scalloped upholstered headboard in the guest room",
       "Hand-textured plaster feature wall with botanical relief",
     ],
+    services: ["home-interior-design-pune", "wardrobe-design-pune", "turnkey-interior-design-pune"],
   },
   {
     id: "luxury",

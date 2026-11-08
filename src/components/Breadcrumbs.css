@@ -1,0 +1,49 @@
+/* ---------- Breadcrumbs ---------- */
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.5rem;
+  font-family: var(--font-accent);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.breadcrumbs li + li::before {
+  content: "/";
+  margin-right: 0.5rem;
+  color: var(--accent);
+}
+
+.breadcrumbs a {
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-underline-offset: 4px;
+}
+
+.breadcrumbs a:hover {
+  color: var(--accent-strong);
+}
+
+.breadcrumbs--on-dark ol {
+  color: var(--on-dark-muted);
+}
+
+.breadcrumbs--on-dark a {
+  text-decoration-color: rgba(246, 241, 228, 0.35);
+}
+
+.breadcrumbs--on-dark a:hover {
+  color: var(--on-dark);
+}
+
+/* Long page names (blog titles) are already in the heading below. */
+.breadcrumbs [aria-current] {
+  display: inline-block;
+  max-width: 26ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: bottom;
+}

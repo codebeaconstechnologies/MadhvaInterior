@@ -65,6 +65,9 @@ img,
 picture,
 video {
   max-width: 100%;
+  /* Images carry width/height attributes (for layout stability); keep
+     their aspect ratio unless a rule sets a height. */
+  height: auto;
   display: block;
 }
 
@@ -369,6 +372,21 @@ p {
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Above-the-fold variant: animates in with CSS alone, so page headings
+   show as soon as the HTML paints rather than after JavaScript loads. */
+.reveal--now {
+  opacity: 1;
+  transform: none;
+  animation: reveal-in 0.8s var(--ease) both;
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

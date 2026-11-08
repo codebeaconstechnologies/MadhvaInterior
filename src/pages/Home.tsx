@@ -10,17 +10,23 @@ import GoogleRating from "../components/GoogleRating";
 import BeforeAfter from "../components/BeforeAfter";
 import Promises from "../components/Promises";
 import { projects } from "../data/projects";
-import { services, trustBadges } from "../data/studio";
+import { Link } from "react-router-dom";
+import { trustBadges } from "../data/studio";
+import { services } from "../data/services";
+import { locations } from "../data/locations";
+import { responsive } from "../lib/images";
 import "./Home.css";
 
 const featured = projects.slice(0, 4);
+const featuredServices = services.slice(0, 4);
+const moreServices = services.slice(4);
 
 export default function Home() {
   return (
     <>
       <Seo
-        title="Madhva Interiors & Design Studio — Pune Interior Designers"
-        description="Madhva Interiors & Design Studio designs elegant, functional, and timeless residential and commercial interiors in Pune. Explore our work and start your project."
+        title="Interior Designer in Pune | Madhva Interiors"
+        description="Looking for an interior designer in Pune? Madhva Interiors offers customized home interiors, modular kitchens, 2BHK and 3BHK interior design solutions. Explore our projects and book a consultation."
         path="/"
       />
 
@@ -160,22 +166,48 @@ export default function Home() {
           <Reveal>
             <SectionHeading
               eyebrow="What We Do"
-              title="Services"
+              title="Interior Design Services in Pune"
               description="Full-service interior design, from first sketch to final styling."
             />
           </Reveal>
           <div className="home-services-grid">
-            {services.map((service, i) => (
+            {featuredServices.map((service, i) => (
               <Reveal key={service.slug} delay={i * 60} className="home-service-card">
-                <span className="home-service-card__frame">
-                  <img src={service.image} alt="" loading="lazy" />
-                </span>
-                <span className="home-service-card__index">{String(i + 1).padStart(2, "0")}</span>
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
+                <Link to={`/services/${service.slug}`} className="home-service-card__link">
+                  <span className="home-service-card__frame">
+                    <img
+                      {...responsive(service.image.src, "(min-width: 1100px) 25vw, (min-width: 640px) 50vw, 100vw")}
+                      alt={service.image.alt}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </span>
+                  <span className="home-service-card__index">{String(i + 1).padStart(2, "0")}</span>
+                  <h3>{service.name}</h3>
+                  <p>{service.summary}</p>
+                </Link>
               </Reveal>
             ))}
           </div>
+          <Reveal className="home-services-more">
+            <span>Also:</span>
+            {moreServices.map((service) => (
+              <Link key={service.slug} to={`/services/${service.slug}`}>
+                {service.name}
+              </Link>
+            ))}
+            <Link to="/services" className="home-services-more__all">
+              All services →
+            </Link>
+          </Reveal>
+          <Reveal className="home-services-more">
+            <span>Areas:</span>
+            {locations.map((l) => (
+              <Link key={l.slug} to={`/locations/${l.slug}`}>
+                Interior designer in {l.area}
+              </Link>
+            ))}
+          </Reveal>
         </div>
       </section>
 

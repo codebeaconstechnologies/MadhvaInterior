@@ -12,7 +12,10 @@ const dist = path.join(root, "dist");
 const ssrDir = path.join(root, "dist-ssr");
 const SITE = "https://www.madhvainteriors.com";
 
-const { render, routes, routeImages } = await import(pathToFileURL(path.join(ssrDir, "entry-server.js")).href);
+const { prepare, render, routes, routeImages, routeLastmod } = await import(
+  pathToFileURL(path.join(ssrDir, "entry-server.js")).href
+);
+await prepare();
 const template = fs.readFileSync(path.join(dist, "index.html"), "utf8");
 
 const SEO_BLOCK = /<!--seo-->[\s\S]*?<!--\/seo-->/;
@@ -25,6 +28,7 @@ function headTags(seo) {
   const lines = [`<title>${esc(seo.title)}</title>`];
   for (const m of seo.meta) lines.push(`<meta ${m.attr}="${m.key}" content="${esc(m.content)}" />`);
   if (seo.canonical) lines.push(`<link rel="canonical" href="${esc(seo.canonical)}" />`);
+  if (seo.jsonLd) lines.push(`<script type="application/ld+json" id="page-jsonld">${seo.jsonLd}</script>`);
   return lines.join("\n    ");
 }
 
@@ -53,7 +57,7 @@ const urls = routes.map((url) => {
   const images = (routeImages[url] ?? [])
     .map((src) => `\n    <image:image><image:loc>${esc(SITE + encodeURI(src))}</image:loc></image:image>`)
     .join("");
-  return `  <url>\n    <loc>${SITE}${url === "/" ? "/" : url}</loc>\n    <lastmod>${today}</lastmod>${images}\n  </url>`;
+  return `  <url>\n    <loc>${SITE}${url === "/" ? "/" : url}</loc>\n    <lastmod>${routeLastmod[url] ?? today}</lastmod>${images}\n  </url>`;
 });
 write(
   "sitemap.xml",

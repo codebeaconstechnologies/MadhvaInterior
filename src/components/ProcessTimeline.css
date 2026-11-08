@@ -72,7 +72,8 @@
   transform: translateY(0);
 }
 
-.timeline__body h4 {
+.timeline__body .timeline__title {
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
   margin-bottom: 0.5rem;
 }
 

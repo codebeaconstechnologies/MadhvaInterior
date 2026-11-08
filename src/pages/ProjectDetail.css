@@ -117,7 +117,8 @@
   text-align: right;
 }
 
-.pd-rooms h4 {
+.pd-rooms__title {
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
   margin-bottom: 0.9rem;
 }
 

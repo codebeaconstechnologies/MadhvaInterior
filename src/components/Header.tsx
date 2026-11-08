@@ -6,8 +6,10 @@ import "./Header.css";
 
 const links = [
   { to: "/", label: "Home" },
+  { to: "/services", label: "Services" },
+  { to: "/gallery", label: "Projects" },
   { to: "/about", label: "About" },
-  { to: "/gallery", label: "Gallery" },
+  { to: "/blog", label: "Blog" },
   { to: "/contact", label: "Contact" },
 ];
 

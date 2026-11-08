@@ -46,7 +46,7 @@ export default function Promises() {
           >
             {icons[i]}
           </svg>
-          <h4>{item.title}</h4>
+          <h3 className="promise__title">{item.title}</h3>
           <p>{item.description}</p>
           <span className="promise__rule" aria-hidden="true" />
         </article>

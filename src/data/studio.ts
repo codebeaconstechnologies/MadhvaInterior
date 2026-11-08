@@ -12,11 +12,12 @@ export const studio = {
   email: "support@madhvainteriors.com",
   instagramHandle: "@madhvainteriors",
   instagramUrl: "https://www.instagram.com/madhvainteriors",
+  // Keep identical to the Google Business Profile and the JSON-LD in index.html.
   address: {
-    line1: "Shop No 233, Shri Ganesh Galaxy",
-    line2: "Pune - Alandi Rd, near Gokhale Mala, Wadmukhwadi",
-    line3: "Charholi Budruk, Pune, Pimpri-Chinchwad, Maharashtra 412105",
-    full: "Shop No 233, Shri Ganesh Galaxy, Pune - Alandi Rd, near Gokhale Mala, Wadmukhwadi, Charholi Budruk, Pune, Pimpri-Chinchwad, Maharashtra 412105",
+    line1: "Shop No. 233, Shri Ganesh Galaxy",
+    line2: "Pune–Alandi Road, Wadmukhwadi",
+    line3: "Charholi Budruk, Pune, Maharashtra 412105",
+    full: "Shop No. 233, Shri Ganesh Galaxy, Pune–Alandi Road, Wadmukhwadi, Charholi Budruk, Pune, Maharashtra 412105",
   },
   hours: "All days, 10:00 AM – 7:00 PM",
   // Canonical host. Also used in index.html, functions/_middleware.ts and scripts/prerender.mjs.

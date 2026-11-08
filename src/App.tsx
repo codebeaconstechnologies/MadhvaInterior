@@ -8,6 +8,11 @@ import About from "./pages/About";
 import Gallery from "./pages/Gallery";
 import ProjectDetail from "./pages/ProjectDetail";
 import Contact from "./pages/Contact";
+import ServicesIndex from "./pages/ServicesIndex";
+import ServicePage from "./pages/ServicePage";
+import LocationPage from "./pages/LocationPage";
+import BlogIndex from "./pages/BlogIndex";
+import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
 
 function ScrollToTop() {
@@ -30,8 +35,13 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/services" element={<ServicesIndex />} />
+          <Route path="/services/:slug" element={<ServicePage />} />
+          <Route path="/locations/:slug" element={<LocationPage />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/gallery/:slug" element={<ProjectDetail />} />
+          <Route path="/blog" element={<BlogIndex />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

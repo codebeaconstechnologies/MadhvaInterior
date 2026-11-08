@@ -1,5 +1,6 @@
 import { FormEvent, useRef, useState } from "react";
 import { studio } from "../data/studio";
+import { track } from "../lib/analytics";
 import "./ContactForm.css";
 
 interface FormState {
@@ -173,6 +174,13 @@ export default function ContactForm() {
 
       if (!res.ok) throw new Error("Request failed");
 
+      // Counted only once the server has accepted the enquiry (GA4 key event).
+      track("generate_lead", {
+        lead_source: "contact_form",
+        project_type: values.projectType,
+        property_type: values.propertyType || undefined,
+        page_path: window.location.pathname,
+      });
       submittedOnceRef.current = true;
       setStatus("success");
       setValues(initialState);
@@ -183,7 +191,7 @@ export default function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="contact-form__status contact-form__status--success" role="status">
+      <div className="contact-form__status contact-form__status--success" role="status" data-track="contact_form_success">
         <h3>Thank you.</h3>
         <p>
           Your enquiry has been received. Please send the WhatsApp message that just opened

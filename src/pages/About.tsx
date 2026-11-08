@@ -5,6 +5,7 @@ import Reveal from "../components/Reveal";
 import ProcessTimeline from "../components/ProcessTimeline";
 import { studio, materials, whyChooseUs } from "../data/studio";
 import { aboutImages } from "../data/images";
+import { responsive } from "../lib/images";
 import "./About.css";
 
 export default function About() {
@@ -14,18 +15,20 @@ export default function About() {
         title="About Us — Interior Designers in Pune"
         description="Madhva Interiors & Design Studio is a Pune-based interior design firm founded by Unmesh Kadre, creating elegant, functional, and timeless spaces."
         path="/about"
+        pageType="AboutPage"
+        breadcrumbs={[{ name: "About", path: "/about" }]}
       />
 
       {/* Intro */}
       <section className="about-intro section">
         <div className="container about-intro__grid">
-          <Reveal>
+          <Reveal immediate>
             <span className="eyebrow">About Madhva Interiors</span>
             <h1 className="about-intro__title">
               Interiors built around how you actually live.
             </h1>
           </Reveal>
-          <Reveal delay={100}>
+          <Reveal immediate delay={100}>
             <p className="lede">
               A Pune-based interior design firm committed to creating elegant, functional,
               and timeless living spaces — for homes and businesses alike.
@@ -39,7 +42,7 @@ export default function About() {
         <div className="container about-story__grid">
           <Reveal className="about-story__image">
             <img
-              src={aboutImages.studio}
+              {...responsive(aboutImages.studio, "(min-width: 960px) 45vw, 100vw")}
               alt="Warm, wood-paneled bedroom concept render by Madhva Interiors"
               loading="lazy"
             />
@@ -67,7 +70,7 @@ export default function About() {
         <div className="container about-founder__grid">
           <Reveal className="about-founder__image">
             <img
-              src={aboutImages.founder}
+              {...responsive(aboutImages.founder, "(min-width: 960px) 35vw, 100vw")}
               alt={`${studio.founder}, founder of Madhva Interiors & Design Studio`}
               loading="lazy"
             />
@@ -127,7 +130,7 @@ export default function About() {
           <div className="about-why-grid">
             {whyChooseUs.map((item, i) => (
               <Reveal key={item.title} delay={i * 50} className="about-why-item">
-                <h4>{item.title}</h4>
+                <h3>{item.title}</h3>
                 <p>{item.description}</p>
               </Reveal>
             ))}
@@ -148,7 +151,7 @@ export default function About() {
           <div className="about-materials">
             {materials.map((m, i) => (
               <Reveal key={m.name} delay={i * 40} className="about-materials__row">
-                <h4>{m.name}</h4>
+                <h3>{m.name}</h3>
                 <span className="about-materials__lifespan">{m.lifespan}</span>
                 <p>{m.usedIn}</p>
               </Reveal>

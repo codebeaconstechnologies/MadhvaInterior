@@ -82,7 +82,7 @@ address.site-footer__contact {
   color: var(--on-dark);
 }
 
-.site-footer__col h4 {
+.site-footer__heading {
   font-family: var(--font-accent);
   font-size: 0.78rem;
   letter-spacing: 0.16em;
@@ -142,5 +142,45 @@ address.site-footer__contact {
   .site-footer__grid {
     grid-template-columns: 1.5fr 0.6fr 1fr 1fr;
     gap: 2.5rem;
+  }
+}
+
+/* Services and areas band, between the main columns and the copyright line */
+.site-footer__links {
+  display: grid;
+  gap: 1.75rem;
+  padding-block: 2rem;
+  border-bottom: 1px solid rgba(243, 236, 225, 0.12);
+}
+
+.site-footer__links .site-footer__heading {
+  font-family: var(--font-accent);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  margin-bottom: 0.8rem;
+  font-weight: 400;
+}
+
+.site-footer__links ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.4rem;
+}
+
+.site-footer__links a {
+  color: var(--on-dark-muted);
+  font-size: 0.88rem;
+}
+
+.site-footer__links a:hover {
+  color: var(--on-dark);
+}
+
+@media (min-width: 960px) {
+  .site-footer__links {
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
   }
 }

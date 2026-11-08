@@ -234,25 +234,27 @@
   flex-direction: column;
   gap: 1.4rem;
   max-width: 46rem;
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 1s var(--ease), transform 1s var(--ease);
+  /* Plain CSS animation, so the heading shows as soon as the HTML paints
+     instead of waiting for JavaScript (better LCP). */
+  animation: hero-content-in 1s var(--ease) both;
 }
 
-.hero__content.is-in {
-  opacity: 1;
-  transform: translateY(0);
+@keyframes hero-content-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
 }
 
 .hero__eyebrow {
   display: block;
-  margin-bottom: 1.4rem;
   line-height: 1.5;
   color: var(--accent-soft);
 }
 
 .hero h1 {
   color: var(--on-dark);
+  font-size: clamp(2.2rem, 7vw, 3.6rem);
 }
 
 .hero__lede {
@@ -358,7 +360,7 @@
   }
 
   .hero h1 {
-    font-size: clamp(2.4rem, 3.5vw, 4.2rem);
+    font-size: clamp(2.2rem, 3vw, 3.6rem);
   }
 
   .hero__actions {

@@ -1,16 +1,22 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-IN">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KXE7T4QFHE"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-KXE7T4QFHE');
-    </script>
     <meta charset="UTF-8" />
+    <!-- Google Analytics 4 (G-KXE7T4QFHE). Loaded only on the live site so
+         local development, pages.dev and preview deploys don't count as
+         visits. Lead / call / WhatsApp events: src/lib/analytics.ts -->
+    <script>
+      if (location.hostname === "www.madhvainteriors.com") {
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { dataLayer.push(arguments); };
+        gtag("js", new Date());
+        gtag("config", "G-KXE7T4QFHE");
+        var ga = document.createElement("script");
+        ga.async = true;
+        ga.src = "https://www.googletagmanager.com/gtag/js?id=G-KXE7T4QFHE";
+        document.head.appendChild(ga);
+      }
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href="/images/studio/logo-icon.png" />
     <link rel="apple-touch-icon" href="/images/studio/logo-icon.png" />
@@ -23,7 +29,7 @@
     />
     <!-- Per-page tags: replaced for each page by scripts/prerender.mjs -->
     <!--seo-->
-    <title>Madhva Interiors &amp; Design Studio | Pune Interior Designers</title>
+    <title>Interior Designer in Pune | Madhva Interiors</title>
     <meta
       name="description"
       content="Madhva Interiors & Design Studio is a Pune-based interior design firm creating elegant, functional, and timeless residential and commercial spaces."
@@ -40,6 +46,7 @@
     <meta property="og:site_name" content="Madhva Interiors & Design Studio" />
     <meta name="twitter:card" content="summary_large_image" />
     <!--/seo-->
+    <!-- Site-wide business details; each page adds its own graph (#page-jsonld). Keep in step with src/data/studio.ts and the Google Business Profile. -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -47,9 +54,9 @@
           {
             "@type": "HomeAndConstructionBusiness",
             "@id": "https://www.madhvainteriors.com/#business",
-            "name": "Madhva Interiors & Design Studio",
-            "alternateName": "Madhva Interiors",
-            "description": "Pune-based interior design studio creating elegant, functional and timeless residential and commercial interiors, with 3D visualization before work begins.",
+            "name": "Madhva Interiors",
+            "alternateName": "Madhva Interiors & Design Studio",
+            "description": "Interior designers in Pune creating complete home interiors, modular kitchens, wardrobes and 2 BHK and 3 BHK interiors, with 3D visualization before work begins.",
             "url": "https://www.madhvainteriors.com/",
             "logo": "https://www.madhvainteriors.com/images/studio/logo-icon.png",
             "image": "https://www.madhvainteriors.com/images/og-image.jpg",
@@ -63,8 +70,8 @@
             },
             "address": {
               "@type": "PostalAddress",
-              "streetAddress": "Shop No 233, Shri Ganesh Galaxy, Pune - Alandi Rd, near Gokhale Mala, Wadmukhwadi, Charholi Budruk",
-              "addressLocality": "Pimpri-Chinchwad",
+              "streetAddress": "Shop No. 233, Shri Ganesh Galaxy, Pune–Alandi Road, Wadmukhwadi, Charholi Budruk",
+              "addressLocality": "Pune",
               "addressRegion": "Maharashtra",
               "postalCode": "412105",
               "addressCountry": "IN"

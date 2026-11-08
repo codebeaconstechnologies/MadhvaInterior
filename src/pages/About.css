@@ -104,7 +104,8 @@
   margin-top: clamp(2.5rem, 5vw, 3.5rem);
 }
 
-.about-why-item h4 {
+.about-why-item h3 {
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
   margin-bottom: 0.5rem;
 }
 
@@ -128,7 +129,7 @@
   border-bottom: 1px solid var(--border);
 }
 
-.about-materials__row h4 {
+.about-materials__row h3 {
   font-size: 1.05rem;
 }
 

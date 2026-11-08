@@ -84,6 +84,45 @@ npm run build
 Outputs to `dist/`. `npm run preview` serves that build locally for a final
 sanity check.
 
+The build does more than bundle:
+
+1. **Prerendering** (`scripts/prerender.mjs`) writes a real HTML file for every
+   page (`services/2bhk-interior-design-pune.html` is served at
+   `/services/2bhk-interior-design-pune`), plus `404.html` and `sitemap.xml`.
+2. **Responsive images** (`vite.config.ts`) writes WebP copies of every photo
+   under `public/images` at a few widths; pages use them via `srcset`
+   (`src/lib/images.ts`). Encoded files are cached in `node_modules/.cache`.
+3. **Verification** (`scripts/verify-dist.mjs`, also `npm test`) fails the build
+   if a page lacks a title, description, canonical or single `<h1>`, if titles
+   or descriptions are duplicated, if JSON-LD is invalid, or if an internal
+   link or image points at nothing.
+
+---
+
+## 3a. SEO content: services, areas, blog
+
+| What | Where | URL |
+|---|---|---|
+| Service pages | `src/data/services.ts` | `/services/<slug>` |
+| Area pages | `src/data/locations.ts` | `/locations/<slug>` |
+| Blog articles | `src/content/blog/*.md` (see the README there) | `/blog/<file-name>` |
+| Projects | `src/data/projects.ts` + `public/images/gallery/<id>/` | `/gallery/<slug>` |
+
+Adding an entry adds its page, its links from the hub pages and footer, and
+its sitemap entry automatically. Keep content honest: no prices, timelines,
+ratings or claims the studio hasn't confirmed, and only add an area page where
+there's real local work to describe.
+
+**Structured data:** the business (`HomeAndConstructionBusiness`) and website
+are in `index.html`; each page adds its own graph (WebPage, BreadcrumbList,
+and Service / BlogPosting / FAQPage where relevant) through the `<Seo>`
+component. Keep the name, address and phone identical across `index.html`,
+`src/data/studio.ts` and the Google Business Profile.
+
+**Analytics:** GA4 (`G-KXE7T4QFHE`) loads only on `www.madhvainteriors.com`.
+Events: `generate_lead` (enquiry form accepted by the server), `click_to_call`,
+`click_whatsapp` — see `src/lib/analytics.ts`.
+
 ---
 
 ## 4. Resend setup (email delivery)

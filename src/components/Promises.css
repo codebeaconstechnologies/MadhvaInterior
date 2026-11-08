@@ -86,7 +86,7 @@
   stroke-dashoffset: 0;
 }
 
-.promise h4,
+.promise .promise__title,
 .promise p {
   position: relative;
   opacity: 0;
@@ -94,7 +94,7 @@
   transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
 }
 
-.promise h4 {
+.promise .promise__title {
   margin-top: 1.75rem;
   font-family: var(--font-display);
   font-size: 1.3rem;
@@ -110,7 +110,7 @@
   transition-delay: calc(var(--delay) + 650ms);
 }
 
-.promises.is-visible .promise h4,
+.promises.is-visible .promise .promise__title,
 .promises.is-visible .promise p {
   opacity: 1;
   transform: translateY(0);
@@ -149,7 +149,7 @@
 @media (prefers-reduced-motion: reduce) {
   .promise,
   .promise__number,
-  .promise h4,
+  .promise .promise__title,
   .promise p {
     clip-path: none;
     opacity: 1;

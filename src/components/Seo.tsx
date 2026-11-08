@@ -25,17 +25,35 @@ function setCanonical(href: string | undefined) {
   el.setAttribute("href", href);
 }
 
+/** The per-page JSON-LD block (the site-wide business graph in index.html is left alone). */
+function setJsonLd(json: string | undefined) {
+  let el = document.getElementById("page-jsonld");
+  if (!json) {
+    el?.remove();
+    return;
+  }
+  if (!el) {
+    el = document.createElement("script");
+    el.id = "page-jsonld";
+    el.setAttribute("type", "application/ld+json");
+    document.head.appendChild(el);
+  }
+  if (el.textContent !== json) el.textContent = json;
+}
+
 export default function Seo(props: SeoProps) {
   const collect = useContext(SeoCollector);
-  const { title, description, path, image, type, noindex } = props;
-  collect?.(seoTags(props));
+  const tags = seoTags(props);
+  collect?.(tags);
 
+  const key = JSON.stringify(tags);
   useEffect(() => {
-    const tags = seoTags({ title, description, path, image, type, noindex });
-    document.title = tags.title;
-    tags.meta.forEach((m) => setMeta(m.attr, m.key, m.content));
-    setCanonical(tags.canonical);
-  }, [title, description, path, image, type, noindex]);
+    const t = JSON.parse(key) as typeof tags;
+    document.title = t.title;
+    t.meta.forEach((m) => setMeta(m.attr, m.key, m.content));
+    setCanonical(t.canonical);
+    setJsonLd(t.jsonLd);
+  }, [key]);
 
   return null;
 }

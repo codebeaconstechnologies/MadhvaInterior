@@ -2,20 +2,15 @@ import { useCallback, useEffect, useState } from "react";
 import Button from "./Button";
 import { studio } from "../data/studio";
 import { heroSlides } from "../data/images";
+import { responsive } from "../lib/images";
 import "./Hero.css";
 
 const SLIDE_MS = 4000;
 
 export default function Hero() {
-  const [mounted, setMounted] = useState(false);
   const [active, setActive] = useState(0);
   const [previous, setPrevious] = useState<number | null>(null);
   const [paused, setPaused] = useState(false);
-
-  useEffect(() => {
-    const id = requestAnimationFrame(() => setMounted(true));
-    return () => cancelAnimationFrame(id);
-  }, []);
 
   const goTo = useCallback((next: number) => {
     setActive((current) => {
@@ -55,7 +50,7 @@ export default function Hero() {
             aria-hidden={i !== active}
           >
             <img
-              src={s.src}
+              {...responsive(s.src, "(min-width: 960px) 65vw, 100vw")}
               alt={s.alt}
               decoding="async"
               loading={i < 2 ? "eager" : "lazy"}
@@ -104,16 +99,12 @@ export default function Hero() {
       </div>
 
       <div className="hero__panel">
-        <div className={`hero__content${mounted ? " is-in" : ""}`}>
-          {/* The label sits inside the h1 so search engines read the heading as
-              "Interior Designers in Pune — Your Dream Interiors…". */}
-          <h1>
-            <span className="eyebrow eyebrow--on-dark hero__eyebrow">Interior Designers in Pune</span>{" "}
-            {studio.tagline}
-          </h1>
+        <div className="hero__content">
+          <span className="eyebrow eyebrow--on-dark hero__eyebrow">{studio.tagline}</span>
+          <h1>Transform Your Home with Expert Interior Designers in Pune</h1>
           <p className="hero__lede">
-            A Pune-based studio designing residential and commercial interiors that are
-            elegant, functional, and timeless — built around the way you actually live.
+            Customized home interiors, modular kitchens and 2 BHK &amp; 3 BHK design — elegant,
+            functional and timeless, built around the way you actually live.
           </p>
           <div className="hero__actions">
             <Button to="/gallery" variant="outline-dark">
